@@ -1,0 +1,4 @@
+services:
+#    tfe_platform_sociale.example:
+#        class: Tfe\PlatformSocialeBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
