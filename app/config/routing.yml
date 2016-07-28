@@ -1,7 +1,7 @@
-tfe_platform_sociale:
-    resource: "@TfePlatformSocialeBundle/Resources/config/routing.yml"
+tfe_core:
+    resource: "@TfeCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+tfe_platforme_sociale:
+    resource: "@TfePlatformSocialeBundle/Resources/config/routing.yml"
+    prefix:   /plateforme-sociale
