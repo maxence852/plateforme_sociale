@@ -1,0 +1,4 @@
+services:
+#    tfe_core.example:
+#        class: Tfe\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

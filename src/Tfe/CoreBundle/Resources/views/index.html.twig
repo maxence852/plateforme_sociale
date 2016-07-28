@@ -1,0 +1,49 @@
+{# On utilise ici le layout général, qui se situe dans ce même CoreBundle maintenant #}
+{% extends "TfeCoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Page d'accueil - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ path('tfe_core_homepage') }}">Accueil</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('tfe_platform_sociale_homepage') }}">Forum</a></li>
+                </ul>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    <li><a href="">Se connecter</a></li>
+                    <li><a href="">S'enregistrer</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    {% endblock %}
+
+{% block body %}
+
+
+{% endblock %}
+
+{% block footer %}
+   <footer><p>Site réalisé par Begon Maxence et Messina Dorian</p></footer>
+{% endblock %}
