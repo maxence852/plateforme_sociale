@@ -27,11 +27,25 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('tfe_platform_sociale_homepage') }}">Forum</a></li>
                 </ul>
+
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <li><a href="">Se connecter</a></li>
-                    <li><a href="">S'enregistrer</a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                    <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                    {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                    {% endif %}
+                    <li class="dropdown">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ app.user.username }} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href=""><i class="fa fa-btn"></i>Paramètre du compte</a></li>
+                        </ul>
+                        {% endif %}
                 </ul>
             </div>
         </div>
