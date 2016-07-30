@@ -1,12 +1,11 @@
 
 tfe_core:
-    resource: "@TfeCoreBundle/Resources/config/routing.yml"
+    resource: "@TfeUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 tfe_platforme_sociale:
     resource: "@TfePlatformSocialeBundle/Resources/config/routing.yml"
     prefix:   /plateforme-sociale
-
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
