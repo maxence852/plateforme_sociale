@@ -1,0 +1,26 @@
+
+registration:
+    check_email: 'Bienvenue, un e-mail a été envoyé à l''adresse %email%. Celui-ci contient un lien d''activation sur lequel il vous faudra cliquer afin d''activer votre compte.'
+    confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
+    back: 'Retour à la page d''origine.'
+    submit: 'Créer un compte'
+    flash:
+        user_created: 'L''utilisateur a été créé avec succès'
+    email:
+        subject: 'Bienvenue %username% !'
+        message: "Bonjour %username% !\n\nPour valider votre compte utilisateur, merci de vouloir cliquer sur ce lien %confirmationUrl%\n\nCordialement,\nL'administrateur de la plateforme Sociale, \nBegon Maxence.\n"
+resetting:
+    password_already_requested: 'Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.'
+    check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.'
+    request:
+        invalid_username: 'Le nom d''utilisateur ou l''adresse e-mail "%username%" n''existe pas.'
+        username: 'Nom d''utilisateur ou adresse e-mail'
+        submit: 'Réinitialiser le mot de passe'
+    reset:
+        submit: 'Modifier le mot de passe'
+    flash:
+        success: 'Le mot de passe a été réinitialisé avec succès'
+    email:
+        subject: 'Réinitialisation de votre mot de passe'
+        message: "Bonjour %username% !\n\nPour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%\n\nCordialement,\nL'équipe.\n"
+

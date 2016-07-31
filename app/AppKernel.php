@@ -16,9 +16,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Tfe\PlatformSocialeBundle\TfePlatformSocialeBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Tfe\CoreBundle\TfeCoreBundle(),
             new Tfe\UserBundle\TfeUserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+
 
         ];
 

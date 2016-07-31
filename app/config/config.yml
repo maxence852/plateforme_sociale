@@ -75,3 +75,13 @@ fos_user:
     registration:
         form:
            type: Tfe\UserBundle\Form\Type\RegistrationFormType
+        confirmation:
+            enabled: true
+            from_email:
+                address: maxence.begon@hotmail.com
+                sender_name: E-mail Confirmation Plateforme Sociale
+    resetting:
+        email:
+           from_email:
+               address: maxence.begon@hotmail.com
+               sender_name: Réinitialisation mdp Plateforme Sociale
