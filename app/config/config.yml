@@ -31,6 +31,9 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+web_profiler:
+    toolbar: true
+    intercept_redirects: true
 
 # Twig Configuration
 twig:
@@ -78,10 +81,39 @@ fos_user:
         confirmation:
             enabled: true
             from_email:
-                address: maxence.begon@hotmail.com
+                address: maxence.begon147@gmail.com
                 sender_name: E-mail Confirmation Plateforme Sociale
     resetting:
         email:
            from_email:
-               address: maxence.begon@hotmail.com
+               address: maxence.begon147@gmail.com
                sender_name: Réinitialisation mdp Plateforme Sociale
+hwi_oauth:
+    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+    #and also, the connecting part (get the token and the user_id)
+
+    connect:
+
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_names: [secured_area]
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            google: google_id
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           '1597541063890879'
+            client_secret:       'a220401dc4a770f78b9f55d002303ef7'
+            scope:               "email"
+            options:
+                display: popup #dialog is optimized for popup window
+                auth_type: rerequest # Re-asking for Declined Permissions
+        google:
+            type:                google
+            client_id:           '812905169796-jlmohop2u01ho858h43v7pc0augjqorn.apps.googleusercontent.com'
+            client_secret:       'H7B_QYJtwDb_nnbWEbPCiCA0'
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"

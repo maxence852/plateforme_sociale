@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Tfe\PlatformSocialeBundle\TfePlatformSocialeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Tfe\CoreBundle\TfeCoreBundle(),
             new Tfe\UserBundle\TfeUserBundle(),
 
