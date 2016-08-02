@@ -44,7 +44,7 @@
                             {{ app.user.username }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href=""><i class="fa fa-btn"></i>Paramètre du compte</a></li>
+                            <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-btn"></i>Paramètre du compte</a></li>
                         </ul>
                         {% endif %}
                 </ul>
