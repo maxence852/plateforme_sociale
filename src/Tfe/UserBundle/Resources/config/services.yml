@@ -5,6 +5,11 @@ services:
         tags:
             - { name: form.type, alias: tfe_user_registration }
 
+    tfe.form.profile.edit:
+        class: Tfe\UserBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.edit.type, alias: tfe_user_profile_edit }
+
 
     my_user_provider:
         class: Tfe\UserBundle\Security\Core\User\FOSUBUserProvider

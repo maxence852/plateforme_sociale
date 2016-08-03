@@ -1,8 +1,149 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+    <div class="fos_user_user_show">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">Modifier son profile</div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                {{ form_start(form, {'method': 'post'}) }}
+                                {{ form_errors(form) }}
 
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                                <div class="form-group">
+                                    {{ form_label(form.username,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.username) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.email,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.email) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.current_password,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.current_password, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.current_password) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.name,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.name) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.firstname,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.firstname) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.age,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.age, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.age) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.gender,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.gender) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.country,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.country) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.language,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.language, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.language) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.web_site,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.web_site, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.web_site) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.facebook_account,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.facebook_account, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.facebook_account) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.twitter_account,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.twitter_account, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.twitter_account) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.description_user,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.description_user, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.description_user) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.signature,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.signature, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.signature) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_label(form.read_level,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.read_level, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.read_level) }}
+                                </div>
+                                {{ form_rest(form) }}
+                                {{ form_widget(form)  }}
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <div>
+                                            <input class="btn btn-primary btn-lg" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                                            <a class="btn btn-danger btn-lg" href="{{ path('fos_user_profile_show') }}">Retour</a>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 {{ form_end(form) }}

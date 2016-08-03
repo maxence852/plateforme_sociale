@@ -1,3 +1,44 @@
+group:
+    edit:
+        submit: 'Mettre à jour le groupe'
+    show:
+        name: 'Nom du groupe'
+    new:
+        submit: 'Créer le groupe'
+    flash:
+        updated: 'Le groupe a été mis à jour'
+        created: 'Le groupe a été créé'
+        deleted: 'Le groupe a été supprimé'
+security:
+    login:
+        username: 'Nom d''utilisateur'
+        password: 'Mot de passe'
+        remember_me: 'Se souvenir de moi'
+        submit: Connexion
+profile:
+    show:
+        username: 'Nom d''utilisateur'
+        email: 'Adresse e-mail'
+        name: 'Nom'
+        firstname: 'Prenom'
+        gender: 'Sexe'
+        country: 'Pays'
+        age: 'Age'
+        language: 'Langue'
+        web_site: 'Site web'
+        facebook_account: 'Compte facebook'
+        twitter_account: 'Compte twitter'
+        description_user: 'Votre description'
+        signature: 'Votre signature'
+        read_level: 'Niveau de lecture'
+    edit:
+        submit: 'Mettre à jour'
+    flash:
+        updated: 'Le profil a été mis à jour'
+change_password:
+    submit: 'Modifier le mot de passe'
+    flash:
+        success: 'Le mot de passe a été modifié'
 
 registration:
     check_email: 'Bienvenue, un e-mail a été envoyé à l''adresse %email%. Celui-ci contient un lien d''activation sur lequel il vous faudra cliquer afin d''activer votre compte.'
@@ -24,3 +65,17 @@ resetting:
         subject: 'Réinitialisation de votre mot de passe'
         message: "Bonjour %username% !\n\nPour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%\n\nCordialement,\nL'équipe.\n"
 
+layout:
+    logout: Déconnexion
+    login: Connexion
+    register: Inscription
+    logged_in_as: 'Connecté en tant que %username%'
+form:
+    group_name: 'Nom du groupe'
+    username: 'Nom d''utilisateur'
+    email: 'Adresse e-mail'
+    current_password: 'Mot de passe actuel'
+    password: 'Mot de passe'
+    password_confirmation: Confirmer le mot de passe
+    new_password: 'Nouveau mot de passe'
+    new_password_confirmation: Confirmer le nouveau mot de passe

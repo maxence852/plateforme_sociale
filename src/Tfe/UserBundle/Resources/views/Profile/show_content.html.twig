@@ -1,19 +1,96 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+<div style="margin-bottom: 10px" >
+<a class="btn btn-primary btn-lg" href="{{ path('fos_user_profile_edit') }}">Editer son profil</a>
+<a class="btn btn-primary btn-lg" href="{{ path('fos_user_change_password') }}">Changer son mot de passe</a>
+<a class="btn btn-danger btn-lg" href="{{ path('tfe_user_delete',{'id' : user.id }) }}">Supprimer son compte </a>
+</div>
 <div class="fos_user_user_show">
-    <div class="panel panel-info">
+    <div class="panel panel-info" style="margin-bottom: 10px">
         <div class="panel-heading">{{ 'profile.show.username'|trans }}</div>
         <div class="panel-body">
             {{ user.username }}
         </div>
     </div>
-    <div class="panel panel-info ">
+    <div class="panel panel-info " style="margin-bottom: 10px">
         <div class="panel-heading ">{{ 'profile.show.email'|trans }}</div>
         <div class="panel-body ">
             {{ user.email }}
         </div>
     </div>
-    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_profile_edit') }}">Editer son profil</a>
-    <a class="btn btn-primary btn-lg" href="{{ path('fos_user_change_password') }}">Changer son mot de passe</a>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.name'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.name }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.firstname'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.firstname }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.age'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.age }}
+        </div>
+    </div>
+
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.gender'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.gender }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.country'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.country }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.language'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.language }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.web_site'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.website }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.facebook_account'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.facebookaccount }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.twitter_account'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.twitteraccount }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.description_user'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.descriptionuser }}
+        </div>
+    </div>
+
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.signature'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.signature }}
+        </div>
+    </div>
+    <div class="panel panel-info " style="margin-bottom: 10px">
+        <div class="panel-heading ">{{ 'profile.show.read_level'|trans }}</div>
+        <div class="panel-body ">
+            {{ user.readlevel }}
+        </div>
+    </div>
+
 </div>
 
