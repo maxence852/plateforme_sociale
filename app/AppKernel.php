@@ -20,8 +20,11 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Tfe\CoreBundle\TfeCoreBundle(),
             new Tfe\UserBundle\TfeUserBundle(),
-
-
+            new Tfe\ForumBundle\TfeForumBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

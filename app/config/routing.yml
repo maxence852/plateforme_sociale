@@ -1,11 +1,15 @@
 
-tfe_core:
+tfe_user_homepage:
     resource: "@TfeUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 tfe_platforme_sociale:
     resource: "@TfePlatformSocialeBundle/Resources/config/routing.yml"
     prefix:   /plateforme-sociale
+
+tfe_forum:
+    resource: "@TfeForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -44,3 +48,5 @@ facebook_login:
 
 google_login:
     path: /login/check-google
+
+
