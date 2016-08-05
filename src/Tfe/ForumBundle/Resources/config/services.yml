@@ -1,0 +1,6 @@
+services:
+
+    tfe.form.new.thread:
+        class: Tfe\ForumBundle\Form\ThreadType
+        tags:
+            - { name: form.new.thread, alias: tfe_forum_new_thread }
