@@ -6,7 +6,7 @@
 
 
 {% block body %}
-<h1>Il y'aura ici le forum</h1>
+<h1>Futur forum</h1>
      {#
      Pour utiliser le système de commentaire de FOSCommentBundle il faut copier cette où l'on vx que le form apparaisse. Sait pas
      encore exactement comment celà fct
@@ -14,17 +14,17 @@
      #}
 
      <div>
-          <a href="#" class="btn btn-default" data-toggle="modal" data-target="#group_form">Add Group</a>
+          <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Add Group</a>
      </div>
 
-
+{% for group in groups %}
 <div class="panel panel-primary">
      <div class="panel-heading">
 
           <div class="clearfix">
-               <h3 class="panel-title pull-left"></h3>
+               <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>
                <!-- bouton supprimer et ajouter groupe discussion-->
-               <a id="" href="#" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">New Category</a>
+               <a id="group_{{  group.id}}" href="" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">New Category</a>
                <a id="" href="#" data-toggle="modal" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer</a>
           </div>
 
@@ -36,11 +36,13 @@
      <div class="panel-body panel-list-group">
           <div class="list-group">
 
-               <a  href="" class="list-group-item"></a>
+               <a  href="" class="list-group-item">aa</a>
+
 
           </div>
      </div>
 </div>
+{% endfor %}
 
 
 
@@ -58,21 +60,86 @@
                          <h4 class="modal-title">New Group</h4>
                     </div>
                     <div class="modal-body">
-                         <form id="target_form" method="post" action="">
+                         {{ form_start(form, {'method': 'post'}) }}
+                         {{ form_errors(form) }}
 
                               <div class="form-group">
-                                   <label for="group_name">Group Name:</label>
-                                   <input type="text" id="group_name" name="group_name" class="form-control">
+                                   {{ form_label(form.title,"") }}
+                                   {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                   {{ form_errors(form.title) }}
+                                   <p></p>
+
+                              </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+               </div>
+          </div>
+     </div>
+
+
+     <!-- modal d'ajout d'une category de discussion -->
+
+     <div class="modal fade" id="category_modal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal">
+                              <span aria-hidden="true">&times;</span>
+                              <span class="sr-only">Close</span>
+                         </button>
+                         <h4 class="modal-title">New Category</h4>
+                    </div>
+                    <div class="modal-body">
+                         {{ form_start(form, {'method': 'post'}) }}
+                         {{ form_errors(form) }}
+
+                              <div class="form-group">
+                                   {{ form_label(form.title,"Label") }}
+                                   {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                   {{ form_errors(form.title) }}
 
                                    <p></p>
 
                               </div>
 
-                         </form>
+
                     </div>
                     <div class="modal-footer">
                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                         <button type="button" class="btn btn-primary" data-dismiss="modal" id="form_submit">Save</button>
+                         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+               </div>
+          </div>
+     </div>
+
+     <!-- modal de suppression d'un groupe de discussion -->
+
+     <div class="modal fade" id="group_delete" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal">
+                              <span aria-hidden="true">&times;</span>
+                              <span class="sr-only">Close</span>
+                         </button>
+                         <h4 class="modal-title">Supprimer le groupe de discussion</h4>
+                    </div>
+                    <div class="modal-body">
+                         <h3>Etes-vous sûr de vouloir supprimer ce groupe de discussion ?</h3>
+                         <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                              <a href="#" type="button" class="btn btn-primary" id="btn_delete_group">Supprimer</a>
+                         </div>
                     </div>
                </div>
           </div>

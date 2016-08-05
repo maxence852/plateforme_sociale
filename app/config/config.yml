@@ -133,4 +133,4 @@ fos_comment:
 assetic:
     debug: '%kernel.debug%'
     use_controller: '%kernel.debug%'
-    bundles: [ "FOSCommentBundle" ]
+    #bundles: [ "FOSCommentBundle" ]
