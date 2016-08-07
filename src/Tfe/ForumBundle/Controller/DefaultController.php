@@ -2,20 +2,21 @@
 
 namespace Tfe\ForumBundle\Controller;
 
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Tfe\ForumBundle\Entity\Category;
-use Tfe\ForumBundle\Entity\Group;
+use Tfe\ForumBundle\Entity\Groupe;
 
 class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
         /********** Enregistrement d'un nouveau Groupe ds le forum ********************/
-        $group = new Group();
+        $group = new Groupe();
 
         $form = $this->get('form.factory')->createBuilder(FormType::class, $group)
             ->add('title', TextType::class, array(
@@ -23,6 +24,14 @@ class DefaultController extends Controller
             ->add('save',      SubmitType::class)
             ->getForm()
         ;
+            $category = new Category();
+        $form1 = $this->get('form.factory')->createBuilder(FormType::class, $category)
+            ->add('title', TextType::class, array(
+                'required'    => true))
+            ->add('save',      SubmitType::class)
+            ->getForm()
+        ;
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -35,23 +44,31 @@ class DefaultController extends Controller
                 return $this->redirectToRoute('tfe_forum_homepage', array('id' => $group->getId()));
             }
         }
+
+        /*********récupère groupe *********/
+
         $groups = $this->getDoctrine()
             ->getManager()
-            ->getRepository('TfeForumBundle:Group')
+            ->getRepository('TfeForumBundle:Groupe')
             ->myFindAll();
 
+        $AllCats = array();
+        $i=0;
+        foreach ($groups as $group){
+                //$index = $group['id'];
+                $cats = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('TfeForumBundle:Category')
+                    ->myFindAllByGroup($group);
+                $AllCats[$i]=$cats;
+                $i++;
+        }
 
-
-
-        $cats = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('TfeForumBundle:Category')
-            ->myFindAll();
 
         return $this->render('TfeForumBundle:Default:index.html.twig', array(
             'form' => $form->createView(),
             'groups'=> $groups,
-           'myCats'=> $cats,
+            'form1' => $form1->createView(),
         ));
 
 
@@ -63,28 +80,57 @@ class DefaultController extends Controller
     {
 
         /********** Enregistrement d'une nouvelle Categorie ds le forum ********************/
-
-        $category = new Category();
-        $form = $this->get('form.factory')->createBuilder(FormType::class, $category)
+        $groupId = $_POST["groupId"];
+        $group = new Groupe();
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $group)
             ->add('title', TextType::class, array(
                 'required'    => false))
+           /* ->add('groupe', TextType::class, array(
+                'required'    => false))*/
             ->add('save',      SubmitType::class)
             ->getForm()
         ;
+
+        $category = new Category();
+        $form1 = $this->get('form.factory')->createBuilder(FormType::class, $category)
+            ->add('title', TextType::class, array(
+                'required'    => true))
+            ->add('save',      SubmitType::class)
+            ->getForm()
+        ;
+        $formOk=false;
         if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
+            $form1->handleRequest($request);
+            if ($form1->isValid()) {
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($category);
+                $repo = $em->getRepository('TfeForumBundle:Groupe');
+                $group = $repo->find($groupId);
+                $group->addCategory($category);
+                //$em->persist($group);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('notice', 'title bien enregistrée.');
                 // Puis on redirige vers la page de visualisation de cettte annonce
-                return $this->redirectToRoute('tfe_forum_homepage', array('id' => $category->getId()));
+                $formOk=true;
             }
+        }
+
+        $groups = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TfeForumBundle:Groupe')
+            ->myFindAll();
+        if($formOk == true){
+            return $this->redirectToRoute('tfe_forum_homepage', array(
+                'form' => $form->createView(),
+                'groups'=> $groups,
+                'form1' => $form1->createView(),
+                'id' => $category->getId()));
         }
         return $this->render('TfeForumBundle:Default:index.html.twig', array(
             'formC' => $form->createView(),
+            'form' => $form->createView(),
+            'groups'=> $groups,
+            'form1' => $form1->createView(),
         ));
     }
 

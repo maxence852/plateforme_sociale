@@ -1,3 +1,4 @@
 tfe_platform_sociale_homepage:
     path:     /
     defaults: { _controller: TfePlatformSocialeBundle:Default:index }
+

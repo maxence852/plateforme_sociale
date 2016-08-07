@@ -36,34 +36,15 @@ class Category
     private $authorId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Group", inversedBy="categories")
-     * @ORM\JoinColumn(nullable=false)
+     ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Groupe", cascade={"persist"}, inversedBy="category")
+     ** @ORM\JoinColumn(nullable=false)
      */
-    private $group;
+    private $groupe;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
+   
 
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime",nullable=true)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    private $updatedAt;
-    
-
+   
 
     /**
      * Get id
@@ -124,82 +105,26 @@ class Category
     }
 
     /**
-     * Set createdAt
+     * Set groupe
      *
-     * @param \DateTime $createdAt
+     * @param \Tfe\ForumBundle\Entity\Groupe $groupe
      *
      * @return Category
      */
-    public function setCreatedAt($createdAt)
+    public function setGroupe(\Tfe\ForumBundle\Entity\Groupe $groupe)
     {
-        $this->createdAt = $createdAt;
+        $this->groupe = $groupe;
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get groupe
      *
-     * @return \DateTime
+     * @return \Tfe\ForumBundle\Entity\Groupe
      */
-    public function getCreatedAt()
+    public function getGroupe()
     {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Category
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set group
-     *
-     * @param \Tfe\ForumBundle\Entity\Group $group
-     *
-     * @return Category
-     */
-    public function setGroup(\Tfe\ForumBundle\Entity\Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
-     * Get group
-     *
-     * @return \Tfe\ForumBundle\Entity\Group
-     */
-    public function getGroup()
-    {
-        return $this->group;
-    }
-
-
-    /*
-     * Don't ERASE PLEASE
-     */
-    public function getGroupId(){
-        return $this->group->id;
+        return $this->groupe;
     }
 }

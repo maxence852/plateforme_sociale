@@ -18,7 +18,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -134,3 +134,25 @@ assetic:
     debug: '%kernel.debug%'
     use_controller: '%kernel.debug%'
     #bundles: [ "FOSCommentBundle" ]
+
+#FOS REST
+#->*Paramètre à revoir car si j'enlève le hrml ds les rules je n'ai que du json et mon site ne s'affiche plus
+fos_rest:
+    routing_loader:
+        include_format: false     #désactive l'ajout automatique de format
+    view:
+        default_engine: twig
+        view_response_listener:   #active le listener
+            enabled: false
+            force: true
+        formats:
+            json: true
+            xml: true
+            html: true
+    format_listener:
+        rules:
+            - {path: '^/', priorities: ['json', 'xml','html'], fallback_format: 'json',  prefer_extension: false} #config pour que toutes les URL renvoient du JSON
+
+    # configuration à rajouter pour désactiver le body listener
+    body_listener:
+        enabled: true

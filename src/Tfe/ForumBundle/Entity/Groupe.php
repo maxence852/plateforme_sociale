@@ -5,12 +5,12 @@ namespace Tfe\ForumBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Groups
+ * Groupe
  *
- * @ORM\Table(name="`group`")
- * @ORM\Entity(repositoryClass="Tfe\ForumBundle\Repository\GroupRepository")
+ * @ORM\Table(name="groupe")
+ * @ORM\Entity(repositoryClass="Tfe\ForumBundle\Repository\GroupeRepository")
  */
-class Group
+class Groupe
 {
     /**
      * @var int
@@ -51,9 +51,22 @@ class Group
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Category", mappedBy="groupe", cascade={"persist"})
+     */
+
+    private $category;
+
+    /**
      * Get id
      *
      * @return int
+     */
+    
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -65,7 +78,7 @@ class Group
      *
      * @param string $title
      *
-     * @return Groups
+     * @return Groupe
      */
     public function setTitle($title)
     {
@@ -89,7 +102,7 @@ class Group
      *
      * @param integer $authorId
      *
-     * @return Groups
+     * @return Groupe
      */
     public function setAuthorId($authorId)
     {
@@ -101,7 +114,7 @@ class Group
     /**
      * Get authorId
      *
-     * @return int
+     * @return integer
      */
     public function getAuthorId()
     {
@@ -113,7 +126,7 @@ class Group
      *
      * @param \DateTime $createdAt
      *
-     * @return Groups
+     * @return Groupe
      */
     public function setCreatedAt($createdAt)
     {
@@ -137,7 +150,7 @@ class Group
      *
      * @param \DateTime $updatedAt
      *
-     * @return Groups
+     * @return Groupe
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -154,5 +167,49 @@ class Group
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Tfe\ForumBundle\Entity\Category $category
+     *
+     * @return Groupe
+     */
+    public function addCategory(\Tfe\ForumBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+
+        //on lie le groupe à la categorie
+        $category->setGroupe($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Tfe\ForumBundle\Entity\Category $category
+     */
+    public function removeCategory(\Tfe\ForumBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

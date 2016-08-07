@@ -24,7 +24,7 @@
           <div class="clearfix">
                <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>
                <!-- bouton supprimer et ajouter groupe discussion-->
-               <a id="group_{{  group.id}}" href="" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">New Category</a>
+               <a id="group_{{  group.id}}" href="" onclick="setGroupId({{ group.id }});" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">New Category</a>
                <a id="" href="#" data-toggle="modal" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer</a>
           </div>
 
@@ -35,9 +35,14 @@
      </div>
      <div class="panel-body panel-list-group">
           <div class="list-group">
+               {% for cat in group.category %}
+                    <script type="text/javascript">
+                        // alert({{ cat.title }});
+                    </script>
 
-               <a  href="" class="list-group-item">aa</a>
+                    <a  href="" class="list-group-item">{{ cat.title }}</a>
 
+               {% endfor %}
 
           </div>
      </div>
@@ -98,14 +103,14 @@
                          <h4 class="modal-title">New Category</h4>
                     </div>
                     <div class="modal-body">
-                         {{ form_start(form, {'method': 'post'}) }}
-                         {{ form_errors(form) }}
+                         {{ form_start(form1, {'method': 'post','action':'category_add'}) }}
+                         {{ form_errors(form1) }}
 
                               <div class="form-group">
-                                   {{ form_label(form.title,"Label") }}
-                                   {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                                   {{ form_errors(form.title) }}
-
+                                   {{ form_label(form1.title,"Label") }}
+                                   {{ form_widget(form1.title, {'attr': {'class': 'form-control'}}) }}
+                                   {{ form_errors(form1.title) }}
+                                   <input type="text" name="groupId" id="groupId"/>
                                    <p></p>
 
                               </div>
@@ -114,10 +119,10 @@
                     </div>
                     <div class="modal-footer">
                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                         {{ form_widget(form1.save, {'attr': {'class': 'btn btn-primary'}}) }}
                     </div>
-                    {{ form_rest(form) }}
-                    {{ form_end(form) }}
+                    {{ form_rest(form1) }}
+                    {{ form_end(form1) }}
                </div>
           </div>
      </div>

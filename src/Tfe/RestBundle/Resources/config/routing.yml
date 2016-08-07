@@ -1,0 +1,17 @@
+tfe_rest_homepage:
+    resource: "@TfeRestBundle/Controller/DefaultController.php"
+    type:     annotation
+
+tfe_rest_place:
+    type: rest
+    resource: "@TfeRestBundle/Controller/PlaceController.php"
+
+
+tfe_rest_utilisateur:
+    type: rest
+    resource: "@TfeRestBundle/Controller/UtilisateurController.php"
+
+
+tfe_rest_prices:
+    type: rest
+    resource: "@TfeRestBundle/Controller/Place/PriceController.php"

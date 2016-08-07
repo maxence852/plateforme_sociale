@@ -12,7 +12,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
     public function myFindAll()
     {
-        $qb = $this->createQueryBuilder('a');
+        /*$qb = $this->createQueryBuilder('a');
 
         $qb->select('a.title,a.id, a.group');
 
@@ -20,7 +20,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb
             ->getQuery()
-            ->getResult();
+            ->getResult();*/
 
 
     }
@@ -29,7 +29,7 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         $qb->select('a.title,a.id');
-        $qb->where('a.groupId = :gpId')
+        $qb->where('a.groupe = :gpId')
             ->setParameter('gpId', $groupId);
         $qb->orderBy('a.title', 'ASC');
 

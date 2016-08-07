@@ -1,3 +1,7 @@
+tfe_rest:
+    resource: "@TfeRestBundle/Resources/config/routing.yml"
+    prefix:   /rest
+
 
 tfe_user_homepage:
     resource: "@TfeUserBundle/Resources/config/routing.yml"
