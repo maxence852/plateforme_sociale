@@ -34,7 +34,8 @@
         "symfony/assetic-bundle": "^2.8",
         "leafo/scssphp": "~0.6",
         "patchwork/jsqueeze": "~1.0",
-        "friendsofsymfony/rest-bundle": "^2.0"
+        "friendsofsymfony/rest-bundle": "^2.0",
+        "nelmio/api-doc-bundle": "^2.13.0"
 
     },
     "require-dev": {

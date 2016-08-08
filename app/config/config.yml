@@ -141,9 +141,9 @@ fos_rest:
     routing_loader:
         include_format: false     #désactive l'ajout automatique de format
     view:
-        default_engine: twig
+        #default_engine: twig
         view_response_listener:   #active le listener
-            enabled: false
+            enabled: true
             force: true
         formats:
             json: true
@@ -151,8 +151,14 @@ fos_rest:
             html: true
     format_listener:
         rules:
-            - {path: '^/', priorities: ['json', 'xml','html'], fallback_format: 'json',  prefer_extension: false} #config pour que toutes les URL renvoient du JSON
-
+            - {path: '^/', priorities: [ 'json','html'], fallback_format:  'json', prefer_extension: false} #config pour que toutes les URL renvoient du JSON
+           # - {path: 'http://tfe.plateformesociale.be:8080/tf2/plateforme_sociale/web/app_dev.php/rest/places/', priorities: ['json', 'xml'], fallback_format: 'json',  prefer_extension: false}
     # configuration à rajouter pour désactiver le body listener
     body_listener:
         enabled: true
+
+#Api Doc
+nelmio_api_doc: ~
+framework:
+    templating:
+        engines: ['twig']
