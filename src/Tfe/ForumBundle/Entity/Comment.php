@@ -3,57 +3,257 @@
 namespace Tfe\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CommentBundle\Entity\Comment as BaseComment;
-use FOS\CommentBundle\Model\SignedCommentInterface;
-use FOS\UserBundle\Propel\User;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Tfe\UserBundle\Entity\Users;
 
 /**
- * @ORM\Entity
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ * Comment
+ *
+ * @ORM\Table(name="forum_comment")
+ * @ORM\Entity(repositoryClass="Tfe\ForumBundle\Repository\CommentRepository")
  */
-class Comment extends BaseComment
+class Comment
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * Thread of this comment
+     * @var string
      *
-     * @var Thread
-     * @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Thread")
+     * @ORM\Column(name="body", type="text")
      */
-    protected $thread;
+    private $body;
 
     /**
-     * Author of the comment
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users")
-     * @var Users
+     * @ORM\Column(name="category_id", type="integer")
      */
-    protected $author;
+    private $categoryId;
 
-    public function setAuthor(UserInterface $author)
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="group_id", type="integer")
+     */
+    private $groupId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="thread_id", type="integer")
+     */
+    private $threadId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="author_id", type="integer")
+     */
+    private $authorId;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        $this->author = $author;
+        $this->createdAt = new \Datetime();
     }
 
-    public function getAuthor()
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
     {
-        return $this->author;
+        return $this->id;
     }
 
-    public function getAuthorName()
+    /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Comment
+     */
+    public function setBody($body)
     {
-        if (null === $this->getAuthor()) {
-            return 'Anonymous';
-        }
+        $this->body = $body;
 
-        return $this->getAuthor()->getUsername();
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set categoryId
+     *
+     * @param integer $categoryId
+     *
+     * @return Comment
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryId
+     *
+     * @return int
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * Set groupId
+     *
+     * @param integer $groupId
+     *
+     * @return Comment
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
+    }
+
+    /**
+     * Get groupId
+     *
+     * @return int
+     */
+    public function getGroupId()
+    {
+        return $this->groupId;
+    }
+
+    /**
+     * Set threadId
+     *
+     * @param integer $threadId
+     *
+     * @return Comment
+     */
+    public function setThreadId($threadId)
+    {
+        $this->threadId = $threadId;
+
+        return $this;
+    }
+
+    /**
+     * Get threadId
+     *
+     * @return int
+     */
+    public function getThreadId()
+    {
+        return $this->threadId;
+    }
+
+    /**
+     * Set authorId
+     *
+     * @param integer $authorId
+     *
+     * @return Comment
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get authorId
+     *
+     * @return int
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Comment
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Comment
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

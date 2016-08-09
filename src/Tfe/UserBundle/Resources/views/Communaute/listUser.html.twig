@@ -1,0 +1,54 @@
+{% extends "TfePlatformSocialeBundle::index.html.twig" %}
+
+{% block title %}
+    Communauté - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <form class="form-inline text-center" >
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputAmount"></label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Rechercher un utilisateur">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
+    </form>
+
+
+    <form class="form-inline text-center">
+        <label><p>Trier par</p>
+            <select class="form-control col-xs-3">
+                <option>Ordre croissant</option>
+                <option>Ordre décroissant</option>
+            </select>
+        </label>
+
+    </form>
+
+
+    <!-- On rows -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Voir Profil</th>
+                <th></th>
+                <th>Abonnement flux de publications</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td><a class="btn btn-primary" href="{{ path('tfe_user_communaute_profil') }}">Profil</a></td>
+                <td></td>
+                <td><button class="btn btn-primary">S'abonner</button></td>
+            </tr>
+        </tbody>
+        <tbody>
+      {% endfor %}
+
+    </table>
+{% endblock %}

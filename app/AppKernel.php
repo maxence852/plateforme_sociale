@@ -23,9 +23,9 @@ class AppKernel extends Kernel
             new Tfe\ForumBundle\TfeForumBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new FOS\CommentBundle\FOSCommentBundle(),
+            //new FOS\CommentBundle\FOSCommentBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new Tfe\RestBundle\TfeRestBundle(),
+            //new Tfe\RestBundle\TfeRestBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 

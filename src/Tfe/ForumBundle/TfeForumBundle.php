@@ -8,6 +8,6 @@ class TfeForumBundle extends Bundle
 {
     public function getParent()
     {
-        return 'FOSCommentBundle';
+        //return 'FOSCommentBundle';
     }
 }

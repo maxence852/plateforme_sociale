@@ -2,12 +2,6 @@ tfe_forum_homepage:
     path:     /
     defaults: { _controller: TfeForumBundle:Default:index }
 
-#FOS Comment
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }
 
 tfe_add_category:
     path:     /category_add

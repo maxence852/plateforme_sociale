@@ -4,11 +4,13 @@ namespace Tfe\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Groupe
  *
- * @ORM\Table(name="groupe")
+ * @ORM\Table(name="forum_groupe")
  * @ORM\Entity(repositoryClass="Tfe\ForumBundle\Repository\GroupeRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Groupe
 {
@@ -37,14 +39,12 @@ class Groupe
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -128,7 +128,7 @@ class Groupe
      *
      * @return Groupe
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -174,6 +174,7 @@ class Groupe
     public function __construct()
     {
         $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \Datetime();
     }
 
     /**

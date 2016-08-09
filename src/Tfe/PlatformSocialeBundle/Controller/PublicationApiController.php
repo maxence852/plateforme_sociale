@@ -87,6 +87,24 @@ class PublicationApiController extends Controller
      * @Rest\Post("/api/publications")
      * @param Request $request
      * @return Publication
+     *
+     *
+     * @ApiDoc(
+     *     description="Créer une nouvelle publication",
+     *
+     *     statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized to say hello",
+     *         404={
+     *           "Returned when the user is not found",
+     *           "Returned when something else is not found"
+     *         }
+     *     },
+     *      parameters={
+     *      {"name"="titrePublication", "dataType"="string", "required"=true, "description"="Titre de la publication"},
+     *      {"name"="contentPublication", "dataType"="text", "required"=true, "description"="Contenu de la publication"}
+     *  }
+     * )
      */
     public function postPublicationsAction(Request $request)
     {
@@ -109,6 +127,19 @@ class PublicationApiController extends Controller
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
      * @Rest\Delete("/api/publication/{id}")
      * @param Request $request
+     *
+     * @ApiDoc(
+     * resource=true,
+     * description="Supprime une publication",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Supprime la publication selon l'id"
+     *      }
+     *  },
+     * )
      */
     public function removePublicationAction(Request $request)
     {
@@ -156,6 +187,23 @@ class PublicationApiController extends Controller
      * @Rest\Put("/api/publication/{id}")
      * @param Request $request
      * @return \Symfony\Component\Form\Form|JsonResponse|Publication
+     *
+     * @ApiDoc(
+     * resource=true,
+     * description="Mettre à jour une publication",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Met à jour la publication selon l'id"
+     *      }
+     *  },
+     *      parameters={
+     *      {"name"="titrePublication", "dataType"="string", "required"=true, "description"="Titre de la publication"},
+     *      {"name"="contentPublication", "dataType"="text", "required"=true, "description"="Contenu de la publication"}
+     *  }
+     * )
      */
     public function updatePublicationAction(Request $request)
     {
@@ -167,6 +215,23 @@ class PublicationApiController extends Controller
      * @Rest\Patch("/api/publication/{id}")
      * @param Request $request
      * @return \Symfony\Component\Form\Form|JsonResponse|Publication
+     *
+     * @ApiDoc(
+     * resource=true,
+     * description="Mettre à jour une partie de la publication",
+     * requirements={
+     *      {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Met à jour la publication selon l'id"
+     *      }
+     *  },
+     *      parameters={
+     *      {"name"="titrePublication", "dataType"="string", "required"=false, "description"="Titre de la publication"},
+     *      {"name"="contentPublication", "dataType"="text", "required"=false, "description"="Contenu de la publication"}
+     *  }
+     * )
      */
     public function patchPublicationAction(Request $request)
     {

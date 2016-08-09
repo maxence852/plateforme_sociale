@@ -8,4 +8,11 @@ tfe_user_delete:
     requirements:
         id: \d+
 
+tfe_user_communaute:
+    path:     /communauté
+    defaults: { _controller: TfeUserBundle:Default:communaute }
 
+
+tfe_user_communaute_profil:
+    path:     /profile
+    defaults: { _controller: TfeUserBundle:Default:profil }

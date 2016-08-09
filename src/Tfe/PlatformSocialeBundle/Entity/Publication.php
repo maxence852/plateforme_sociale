@@ -3,6 +3,7 @@
 namespace Tfe\PlatformSocialeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Publication
@@ -56,12 +57,25 @@ class Publication
      */
     private $motsCles;
 
+
+    /**
+     * @var Date
+     *
+     * @ORM\Column(name="date_publication", type="date", nullable=true)
+     */
+    private $datePublication;
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \Datetime();
+    }
 
     /**
      * @var \DateTime
@@ -189,7 +203,7 @@ class Publication
      *
      * @return Publication
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -252,5 +266,31 @@ class Publication
     public function getMotsCles()
     {
         return $this->motsCles;
+    }
+
+   
+
+    /**
+     * Set datePublication
+     *
+     * @param \DateTime $datePublication
+     *
+     * @return Publication
+     */
+    public function setDatePublication($datePublication)
+    {
+        $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    /**
+     * Get datePublication
+     *
+     * @return \DateTime
+     */
+    public function getDatePublication()
+    {
+        return $this->datePublication;
     }
 }

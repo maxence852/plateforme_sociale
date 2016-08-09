@@ -186,7 +186,8 @@ class Users extends BaseUser
      */
     protected $read_level;
 
-
+    /** @ORM\Column(name="user_point", type="integer", nullable=true) */
+    protected $userPoint;
 
     /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
     protected $facebook_id;
@@ -591,5 +592,29 @@ class Users extends BaseUser
     public function getReadLevel()
     {
         return $this->read_level;
+    }
+
+    /**
+     * Set userPoint
+     *
+     * @param integer $userPoint
+     *
+     * @return Users
+     */
+    public function setUserPoint($userPoint)
+    {
+        $this->userPoint = $userPoint;
+
+        return $this;
+    }
+
+    /**
+     * Get userPoint
+     *
+     * @return integer
+     */
+    public function getUserPoint()
+    {
+        return $this->userPoint;
     }
 }
