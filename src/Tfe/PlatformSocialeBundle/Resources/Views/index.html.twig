@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block header %}
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="background-color: #404040">
         <div class="container">
             <div class="navbar-header">
 
@@ -19,34 +19,34 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ path('tfe_platform_sociale_publication') }}">Accueil</a>
+                <a class="navbar-brand" href="{{ path('tfe_platform_sociale_publication') }}" style="color: white" >Accueil</a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('tfe_forum_homepage') }}">Forum</a></li>
+                    <li><a href="{{ path('tfe_forum_homepage') }}" style="color: white">Forum</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('tfe_user_communaute') }}">Communauté</a></li>
+                    <li><a href="{{ path('tfe_user_communaute') }}" style="color: white">Communauté</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
-                        <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}" style="color: white">Deconnexion</a></li>
                     {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                        <li><a href="{{ path('fos_user_registration_register') }}">inscription</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}" style="color: white">Connexion</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}" style="color: white">inscription</a></li>
                     {% endif %}
-                    <li class="dropdown">
+                    <li class="dropdown" style="background-color: #404040">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
                             {{ app.user.username }} <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu" role="menu" style="background-color: #404040">
                             <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-btn"></i>Paramètre du compte</a></li>
                         </ul>
                         {% endif %}

@@ -4,6 +4,24 @@
      Plateforme Sociale
 {% endblock %}
 
+{% block header %}
+     {{ parent() }}
+
+      <style rel="stylesheet">
+      #panelGroup
+      {
+           background-color: #404040;
+
+      }
+      #panelGroup:hover
+      {
+           background-color: #1e90ff;
+
+      }
+     </style>
+
+
+{% endblock %}
 
 {% block body %}
 <h1>Futur forum</h1>
@@ -16,10 +34,9 @@
      <div>
           <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Add Group</a>
      </div>
-
 {% for group in groups %}
 <div class="panel panel-primary">
-     <div class="panel-heading">
+     <div class="panel-heading" id="panelGroup">
 
           <div class="clearfix">
                <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>

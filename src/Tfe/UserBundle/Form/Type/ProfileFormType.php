@@ -12,12 +12,14 @@
 namespace Tfe\UserBundle\Form\Type;
 
 
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Language;
 
@@ -28,12 +30,12 @@ class ProfileFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, array(
+        $builder->add('name', TextType::class, array(
             'label' => 'profile.show.name',
             'translation_domain' => 'FOSUserBundle',
             'required'    => false));
 
-        $builder->add('firstname', null, array(
+        $builder->add('firstname', TextType::class, array(
             'label' => 'profile.show.firstname',
             'translation_domain' => 'FOSUserBundle'));
 

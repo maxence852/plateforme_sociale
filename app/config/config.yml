@@ -153,7 +153,7 @@ fos_rest:
             html: true
     format_listener:
         rules:
-            - {path: '^/', priorities: [ 'json','html'], fallback_format:  'json', prefer_extension: false} #config pour que toutes les URL renvoient du JSON
+            - {path: '^/', priorities: [ 'html','json'], fallback_format:  'json', prefer_extension: false} #config pour que toutes les URL renvoient du JSON
            # - {path: 'http://tfe.plateformesociale.be:8080/tf2/plateforme_sociale/web/app_dev.php/rest/places/', priorities: ['json', 'xml'], fallback_format: 'json',  prefer_extension: false}
     # configuration à rajouter pour désactiver le body listener
     body_listener:
