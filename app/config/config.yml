@@ -121,7 +121,7 @@ hwi_oauth:
             type:                google
             client_id:           '812905169796-jlmohop2u01ho858h43v7pc0augjqorn.apps.googleusercontent.com'
             client_secret:       'H7B_QYJtwDb_nnbWEbPCiCA0'
-            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+            scope:               "email profile"
 
 #fos comment
 #fos_comment:
@@ -164,3 +164,39 @@ nelmio_api_doc: ~
 framework:
     templating:
         engines: ['twig']
+
+
+
+#pagination
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+#bbcode
+fm_bbcode:
+      filter_sets:
+        my_default_filter:
+          strict: false # if you want to parse attr values without quotes
+          locale: ru
+          xhtml: true
+          filters: [ default, quote ]
+          whitelist: [ b,i,u, quote ]
+        my_forum_filter:
+           locale: ru
+           xhtml: true
+           filters: [ default, quote ]
+           whitelist: [ b, quote ]
+        my_comment_filter:
+           locale: ru
+           xhtml: true
+           filters: [ default, block, code, email, image, list, quote, text, url, video ]
+      config:
+        templates:
+          - path: '@TfePlatformSocialeBundle/Resources/views/Publications/publications.html.twig'

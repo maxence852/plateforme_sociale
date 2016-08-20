@@ -35,7 +35,9 @@
         "leafo/scssphp": "~0.6",
         "patchwork/jsqueeze": "~1.0",
         "friendsofsymfony/rest-bundle": "^2.0",
-        "nelmio/api-doc-bundle": "^2.13.0"
+        "nelmio/api-doc-bundle": "^2.13.0",
+        "helios-ag/fm-bbcode-bundle": "~7",
+        "knplabs/knp-paginator-bundle": "~2.5.3"
 
     },
     "require-dev": {

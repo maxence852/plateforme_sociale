@@ -62,8 +62,8 @@
                                     </div>
                                     <div class="form-group">
                                         {{ form_label(form.contentPublication,"Publication", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
-                                        <div class="col-md-6">
-                                            {{ form_widget(form.contentPublication, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="col-md-8">
+                                            {{ form_widget(form.contentPublication, {'attr': {'class': 'form-control ckeditor'}}) }}
                                         </div>
                                         {{ form_errors(form.contentPublication) }}
                                     </div>
@@ -84,4 +84,7 @@
     {{ form_widget(form)  }}
     {{ form_end(form) }}
 
+    {{'[b]Bold text[/b]'|bbcode_filter('my_default_filter')}}
+    {{'[u]Underlined text[/u]'|bbcode_filter('my_default_filter')}}
+    {{'[i]Italic text[/i]'|bbcode_filter('my_default_filter')}}
 {% endblock %}

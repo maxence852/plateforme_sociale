@@ -28,7 +28,7 @@ security:
 
           # login success redirecting options (read further below)
           always_use_default_target_path: true
-          default_target_path:   /plateforme-sociale
+          default_target_path:   /plateforme-sociale/publications
 
 
 
@@ -42,6 +42,7 @@ security:
               google:   "/login/check-google"
           login_path:        /login
           failure_path:      /login
+          default_target_path:   /plateforme-sociale/publications
 
           oauth_user_provider:
               service: my_user_provider
