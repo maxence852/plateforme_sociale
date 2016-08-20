@@ -25,24 +25,25 @@ class DefaultController extends Controller
     }
 
 
-    public function communauteAction()
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function communauteAction(Request $request)
     {
-        /*$form = $this->get('form.factory')->createBuilder(FormType::class, $order)
-            ->add('gender', ChoiceType::class, array(
-            'choices' => array(
-                'Homme' => 'Homme',
-                'Femme' => 'Femme',
-            ),
-            'required'    => false,
-            'placeholder' => '',
-            'empty_data'  => null,
-            'label' => 'profile.show.gender', 'translation_domain' => 'FOSUserBundle'));*/
-
-
         $userManager = $this->get('fos_user.user_manager');
         $users = $userManager->findUsers();
+
+        $paginator  = $this->get('knp_paginator');
+        $users = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
         return $this->render('TfeUserBundle:Communaute:listUser.html.twig', array(
-        'users' =>   $users
+            'users' =>   $users,
+            'paginator'=> $paginator
         ));
     }
 
