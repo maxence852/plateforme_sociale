@@ -25,6 +25,7 @@ class DefaultController extends Controller
     }
 
 
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -45,11 +46,6 @@ class DefaultController extends Controller
             'users' =>   $users,
             'paginator'=> $paginator
         ));
-    }
-
-    public function profilAction()
-    {
-        return $this->render('TfeUserBundle:Communaute:profilUser.html.twig');
     }
 
 }

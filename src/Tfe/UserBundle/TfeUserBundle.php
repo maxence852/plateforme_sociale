@@ -9,5 +9,7 @@ class TfeUserBundle extends Bundle
     public function getParent()
     {
         return 'FOSUserBundle';
+
     }
+
 }

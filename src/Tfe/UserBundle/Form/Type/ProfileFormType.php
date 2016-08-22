@@ -16,12 +16,16 @@ namespace Tfe\UserBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Language;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class ProfileFormType extends AbstractType
@@ -90,7 +94,7 @@ class ProfileFormType extends AbstractType
             'required'    => false));
 
         $builder->add('read_level',ChoiceType::class, array(
-                'choices' => array(
+            'choices' => array(
                 'lecteur débutant' => 'lecteur débutant',
                 'lecteur amateur' => 'lecteur amateur',
                 'lecteur confirmé' => 'lecteur confirmé',
@@ -100,6 +104,13 @@ class ProfileFormType extends AbstractType
             'placeholder' => '',
             'empty_data'  => null,
             'label' => 'profile.show.read_level', 'translation_domain' => 'FOSUserBundle'));
+
+        $builder->add('imageFile', VichImageType::class, array( //metre FileType fct aussi todo refaire une belle image pour le bouton
+            'required'      => false,
+            'allow_delete'  => false, // not mandatory, default is true
+            'download_link' => false, // not mandatory, default is true
+           ));
+
 
     }
 

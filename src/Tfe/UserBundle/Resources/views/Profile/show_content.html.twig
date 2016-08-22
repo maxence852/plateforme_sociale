@@ -11,6 +11,13 @@
             {{ user.username }}
         </div>
     </div>
+    <div class="panel panel-info" style="margin-bottom: 10px">
+        <div class="panel-heading ">avatar</div>
+        <div class="panel-body ">
+            <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.imageName }}" width="250px" height="250px"/>
+        </div>
+    </div>
+
     <div class="panel panel-info " style="margin-bottom: 10px">
         <div class="panel-heading ">{{ 'profile.show.email'|trans }}</div>
         <div class="panel-body ">

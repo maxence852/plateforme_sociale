@@ -13,6 +13,3 @@ tfe_user_communaute:
     defaults: { _controller: TfeUserBundle:Default:communaute }
 
 
-tfe_user_communaute_profil:
-    path:     /profile
-    defaults: { _controller: TfeUserBundle:Default:profil }

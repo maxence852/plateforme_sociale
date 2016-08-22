@@ -49,6 +49,14 @@
                                     </div>
                                     {{ form_errors(form.firstname) }}
                                 </div>
+                                <div class="form-group">
+                                    {{ form_label(form.imageFile,"ajouter un avatar", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        <!--  -->
+                                        {{ form_widget(form.imageFile) }}
+                                    </div>
+                                    {{ form_errors(form.imageFile) }}
+                                </div>
 
                                 <div class="form-group">
                                     {{ form_label(form.age,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
