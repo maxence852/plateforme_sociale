@@ -12,4 +12,24 @@ namespace Tfe\UserBundle\Repository;
 class UsersRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function AscAll()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->orderBy('a.username', 'ASC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+    public function DescAll()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->orderBy('a.username', 'DESC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

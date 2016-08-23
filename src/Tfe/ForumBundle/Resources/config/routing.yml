@@ -6,3 +6,7 @@ tfe_forum_homepage:
 tfe_add_category:
     path:     /category_add
     defaults: { _controller: TfeForumBundle:Default:addCategory }
+
+tfe_forum_category:
+    path:     /category
+    defaults: { _controller: TfeForumBundle:Category:index }

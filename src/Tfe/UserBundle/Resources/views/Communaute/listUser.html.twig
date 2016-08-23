@@ -6,26 +6,36 @@
 
 {% block body %}
 
-    <form class="form-inline text-center" >
+    <div class="form-inline text-center" >
         <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount"></label>
-            <div class="input-group">
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Rechercher un utilisateur">
-            </div>
+            {{ form_start(form2, {'method': 'post'}) }}
+            {{ form_label(form2.rechercher,"rechercher un utilisateur", {'label_attr': {'class': 'control-label '}}) }}
+                <div class="input-group">
+                    {{ form_widget(form2.rechercher, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form2.rechercher) }}
+                </div>
         </div>
-        <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
-    </form>
+        {{ form_widget(form2.rechercherUser, {'attr': {'class': 'btn btn-primary glyphicon glyphicon-search'}}) }}
+            {{ form_rest(form2) }}
+            {{ form_widget(form2)  }}
+            {{ form_end(form2) }}
+    </div>
 
+<div class="form-inline text-center" style="margin-top: 10px">
+    <div class="form-group">
+    {{ form_start(form, {'method': 'post'}) }}
+    {{ form_label(form.tris,"Trier par ordre", {'label_attr': {'class': 'control-label'}}) }}
+             <div class="input-group">
+                {{ form_widget(form.tris, {'attr': {'class': 'form-control col-xs-3'}}) }}
+                {{ form_errors(form.tris) }}
+            </div>
+    </div>
+    {{ form_widget(form.trier, {'attr': {'class': 'btn btn-primary'}}) }}
 
-    <form class="form-inline text-center">
-        <label><p>Trier par</p>
-            <select class="form-control col-xs-3">
-                <option>Ordre croissant</option>
-                <option>Ordre décroissant</option>
-            </select>
-        </label>
-
-    </form>
+    {{ form_rest(form) }}
+    {{ form_widget(form)  }}
+    {{ form_end(form) }}
+    </div>
 
 
     <!-- On rows -->
@@ -42,9 +52,22 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.username }}</td>
-                <td><a class="btn btn-primary" href="{{ path('tfe_user_communaute_profil') }}">Profil</a></td>
+                <td>
+                        <a class="btn btn-primary" href="{{ path('tfe_user_communaute_profil', {'id': user.id}) }}">Profil</a>
+                </td>
                 <td></td>
-                <td><button class="btn btn-primary">S'abonner</button></td>
+                <td>
+                    {% set Unfound = 0 %}
+                    {% for abonnement in abonnementsRepo  %}
+                        {% if abonnement.suiviId == user.id %}
+                            <a class="btn btn-primary" href="{{ path('tfe_user_communaute_desabonnement', {'suiviId': user.id ,'suiveurId' :  app.user.id}) }}" style="background-color: red">Se désabonner</a>
+                            {% set Unfound = 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if Unfound == 0 %}
+                        <a class="btn btn-primary" href="{{ path('tfe_user_communaute_abonnement', {'suiviId': user.id, 'suiveurId' :  app.user.id}) }}">S'abonner</a>
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
         <tbody>

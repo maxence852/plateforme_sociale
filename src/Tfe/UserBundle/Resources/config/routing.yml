@@ -13,3 +13,15 @@ tfe_user_communaute:
     defaults: { _controller: TfeUserBundle:Default:communaute }
 
 
+#route qui doit afficher le profil d'un utilisateur en particulier.
+tfe_user_communaute_profil:
+    path:     /communauté/profil/{id}
+    defaults: { _controller: TfeUserBundle:Default:communauteProfil }
+
+tfe_user_communaute_abonnement:
+    path:     /communauté/abonnement/{suiveurId}/{suiviId}
+    defaults: { _controller: TfeUserBundle:Default:communauteAbonnement }
+
+tfe_user_communaute_desabonnement:
+    path:     /communauté/desabonnement/{suiveurId}/{suiviId}
+    defaults: { _controller: TfeUserBundle:Default:communauteDesabonnement }

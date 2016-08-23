@@ -10,4 +10,33 @@ namespace Tfe\UserBundle\Repository;
  */
 class AbonnementUserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAbonnements($idSuiveur)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.suiviId')
+           ->where('a.suiveurId = :suiveurid')
+            ->setParameter('suiveurid', $idSuiveur)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getAbonnement($idSuiveur, $idSuivi)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.suiveurId = :suiveurid')
+            ->setParameter('suiveurid', $idSuiveur)
+            ->andWhere('a.suiviId = :suiviId')
+            ->setParameter('suiviId', $idSuivi)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }
