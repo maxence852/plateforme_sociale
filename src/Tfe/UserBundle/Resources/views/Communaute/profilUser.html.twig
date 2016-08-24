@@ -17,95 +17,118 @@
                 {{ user.username }}
             </div>
         </div>
+        {% if user.email is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.email'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.email }}
+                </div>
+            </div>
+        {% endif %}
         {% if user.imageFile is not empty %}
-        <div class="panel panel-info" style="margin-bottom: 10px">
-            <div class="panel-heading ">avatar</div>
-            <div class="panel-body ">
-                <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.imageName }}" width="250px" height="250px"/>
+            <div class="panel panel-info" style="margin-bottom: 10px">
+                <div class="panel-heading ">avatar</div>
+                <div class="panel-body ">
+                    <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{ user.imageName }}" width="250px" height="250px"/>
+                </div>
             </div>
-        </div>
-            {% endif %}
-
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.email'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.email }}
+        {% endif %}
+        {% if user.name is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.name'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.name }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.name'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.name }}
+        {% endif %}
+        {% if user.firstname is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.firstname'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.firstname }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.firstname'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.firstname }}
+        {% endif %}
+        {% if user.age is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.age'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.age }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.age'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.age }}
+        {% endif %}
+        {% if user.gender is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.gender'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.gender }}
+                </div>
             </div>
-        </div>
-
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.gender'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.gender }}
+        {% endif %}
+        {% if user.country is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.country'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.country }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.country'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.country }}
+        {% endif %}
+        {% if user.language is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.language'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.language }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.language'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.language }}
+        {% endif %}
+        {% if user.website is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.web_site'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.website }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.web_site'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.website }}
+        {% endif %}
+        {% if user.facebookaccount is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.facebook_account'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.facebookaccount }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.facebook_account'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.facebookaccount }}
+        {% endif %}
+        {% if user.twitteraccount is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.twitter_account'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.twitteraccount }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.twitter_account'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.twitteraccount }}
+        {% endif %}
+         {% if user.descriptionuser is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.description_user'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.descriptionuser }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.description_user'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.descriptionuser }}
+         {% endif %}
+        {% if user.signature is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.signature'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.signature }}
+                </div>
             </div>
-        </div>
-
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.signature'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.signature }}
+        {% endif %}
+        {% if user.readlevel is not empty %}
+            <div class="panel panel-info " style="margin-bottom: 10px">
+                <div class="panel-heading ">{{ 'profile.show.read_level'|trans }}</div>
+                <div class="panel-body ">
+                    {{ user.readlevel }}
+                </div>
             </div>
-        </div>
-        <div class="panel panel-info " style="margin-bottom: 10px">
-            <div class="panel-heading ">{{ 'profile.show.read_level'|trans }}</div>
-            <div class="panel-body ">
-                {{ user.readlevel }}
-            </div>
-        </div>
+        {% endif %}
 
     </div>
 
