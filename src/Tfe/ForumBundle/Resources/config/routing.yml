@@ -8,5 +8,9 @@ tfe_add_category:
     defaults: { _controller: TfeForumBundle:Default:addCategory }
 
 tfe_forum_category:
-    path:     /category
+    path:     /category/{id}
     defaults: { _controller: TfeForumBundle:Category:index }
+
+tfe_add_thread:
+    path:     /thread_add
+    defaults: { _controller: TfeForumBundle:Category:addThread }

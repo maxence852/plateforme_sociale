@@ -9,10 +9,10 @@
     <div class="form-inline text-center" >
         <div class="form-group">
             {{ form_start(form2, {'method': 'post'}) }}
-            {{ form_label(form2.rechercher,"rechercher un utilisateur", {'label_attr': {'class': 'control-label '}}) }}
+            {{ form_label(form2.searchUser,"rechercher un utilisateur", {'label_attr': {'class': 'control-label '}}) }}
                 <div class="input-group">
-                    {{ form_widget(form2.rechercher, {'attr': {'class': 'form-control'}}) }}
-                    {{ form_errors(form2.rechercher) }}
+                    {{ form_widget(form2.searchUser, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form2.searchUser) }}
                 </div>
         </div>
         {{ form_widget(form2.rechercherUser, {'attr': {'class': 'btn btn-primary glyphicon glyphicon-search'}}) }}
@@ -24,10 +24,10 @@
 <div class="form-inline text-center" style="margin-top: 10px">
     <div class="form-group">
     {{ form_start(form, {'method': 'post'}) }}
-    {{ form_label(form.tris,"Trier par ordre", {'label_attr': {'class': 'control-label'}}) }}
+    {{ form_label(form.orderby,"Trier par ordre", {'label_attr': {'class': 'control-label'}}) }}
              <div class="input-group">
-                {{ form_widget(form.tris, {'attr': {'class': 'form-control col-xs-3'}}) }}
-                {{ form_errors(form.tris) }}
+                {{ form_widget(form.orderby, {'attr': {'class': 'form-control col-xs-3'}}) }}
+                {{ form_errors(form.orderby) }}
             </div>
     </div>
     {{ form_widget(form.trier, {'attr': {'class': 'btn btn-primary'}}) }}

@@ -32,14 +32,16 @@
 
 
         <div>
-            <a href="" class="btn btn-default">Add Thread</a>
+            <a href="" class="btn btn-default" onclick="setCategoryId({{ category.id }});" data-toggle="modal" data-target="#thread_modal">Add Thread</a>
         </div>
 
 
         <div class="panel panel-primary">
             <div class="panel-heading" id="panelCategory">
                 <div class="clearfix">
-                    <h3 class="panel-title pull-left"></h3>
+                    <h3 class="panel-title pull-left">{{  category.groupe.title}}
+                        -{{  category.title}}
+                        -{{  category.id}}</h3>
                     <!-- bouton supprimer groupe discussion-->
                     <a id="" href="#" data-toggle="modal" data-target="#category_delete" class="btn btn-danger btn-xs pull-right delete_category">Supprimer</a>
                 </div>
@@ -57,6 +59,42 @@
                 </div>
             </div>
         </div>
+
+    <!-- modal d'ajout d'un thread de discussion -->
+
+    <div class="modal fade" id="thread_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">New Thread</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form, {'method': 'post','action':'thread_add'}) }}
+                    {{ form_errors(form) }}
+
+                    <div class="form-group">
+                        {{ form_label(form.title,"") }}
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.title) }}
+                        <input type="text" name="categoryId" id="categoryId"/>
+                        <p></p>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 
         <!-- modal de suppression d'un groupe de discussion -->
 

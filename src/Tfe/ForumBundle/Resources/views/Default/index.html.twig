@@ -57,7 +57,7 @@
                         // alert({{ cat.title }});
                     </script>
 
-                    <a  href="" class="list-group-item">{{ cat.title }}</a>
+                    <a  href="{{ path('tfe_forum_category', {'id': cat.id}) }}" class="list-group-item">{{ cat.title }}</a>
 
                {% endfor %}
 
@@ -127,7 +127,7 @@
                                    {{ form_label(form1.title,"Label") }}
                                    {{ form_widget(form1.title, {'attr': {'class': 'form-control'}}) }}
                                    {{ form_errors(form1.title) }}
-                                   <input type="text" name="groupId" id="groupId"/>
+                                   <input type="hidden" name="groupId" id="groupId"/>
                                    <p></p>
 
                               </div>

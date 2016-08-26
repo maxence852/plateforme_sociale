@@ -2,6 +2,7 @@
 
 namespace Tfe\UserBundle\Entity;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -241,6 +242,9 @@ class Users extends BaseUser
      * @var \DateTime
      */
     private $updatedAt;
+
+
+
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance

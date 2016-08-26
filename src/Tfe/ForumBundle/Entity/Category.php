@@ -37,6 +37,11 @@ class Category
     private $authorId;
 
     /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Thread", mappedBy="category", cascade={"persist"})
+     */
+    private $thread;
+
+    /**
      ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Groupe", cascade={"persist"}, inversedBy="category")
      ** @ORM\JoinColumn(nullable=false)
      */
@@ -65,6 +70,8 @@ class Category
    
 
    
+
+    
 
     /**
      * Get id
@@ -125,37 +132,13 @@ class Category
     }
 
     /**
-     * Set groupe
-     *
-     * @param \Tfe\ForumBundle\Entity\Groupe $groupe
-     *
-     * @return Category
-     */
-    public function setGroupe(\Tfe\ForumBundle\Entity\Groupe $groupe)
-    {
-        $this->groupe = $groupe;
-
-        return $this;
-    }
-
-    /**
-     * Get groupe
-     *
-     * @return \Tfe\ForumBundle\Entity\Groupe
-     */
-    public function getGroupe()
-    {
-        return $this->groupe;
-    }
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      *
      * @return Category
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -194,5 +177,63 @@ class Category
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Add thread
+     *
+     * @param \Tfe\ForumBundle\Entity\Thread $thread
+     *
+     * @return Category
+     */
+    public function addThread(\Tfe\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread[] = $thread;
+        $thread->setCategory($this);
+        return $this;
+    }
+
+    /**
+     * Remove thread
+     *
+     * @param \Tfe\ForumBundle\Entity\Thread $thread
+     */
+    public function removeThread(\Tfe\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread->removeElement($thread);
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Set groupe
+     *
+     * @param \Tfe\ForumBundle\Entity\Groupe $groupe
+     *
+     * @return Category
+     */
+    public function setGroupe(\Tfe\ForumBundle\Entity\Groupe $groupe)
+    {
+        $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Get groupe
+     *
+     * @return \Tfe\ForumBundle\Entity\Groupe
+     */
+    public function getGroupe()
+    {
+        return $this->groupe;
     }
 }

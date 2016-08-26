@@ -12,7 +12,7 @@ namespace Tfe\UserBundle\Repository;
 class UsersRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function AscAll()
+    public function FindUsersAscAll()
     {
         $qb = $this->createQueryBuilder('a');
         $qb->orderBy('a.username', 'ASC');
@@ -23,10 +23,42 @@ class UsersRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    public function DescAll()
+    public function FindUsersDescAll()
     {
         $qb = $this->createQueryBuilder('a');
         $qb->orderBy('a.username', 'DESC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function FindUsersAsc($name)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where("a.username like '%".$name."%'");
+        $qb->orderBy('a.username', 'ASC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+    public function FindUsersDesc($name)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where("a.username like '%".$name."%'");
+        $qb->orderBy('a.username', 'DESC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function ResearchUser($name)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where("a.username like '%".$name."%'");
         return $qb
             ->getQuery()
             ->getResult()

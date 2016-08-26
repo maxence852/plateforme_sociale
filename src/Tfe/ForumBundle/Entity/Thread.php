@@ -65,24 +65,24 @@ class Thread
     private $body;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="categoey_id", type="integer")
+     ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Category", cascade={"persist"}, inversedBy="thread")
+     ** @ORM\JoinColumn(nullable=false)
      */
-    private $categoeyId;
+    private $category;
 
-    /**
+    /*
      * @var int
      *
      * @ORM\Column(name="group_id", type="integer")
-     */
+
     private $groupId;
+*/
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +130,7 @@ class Thread
     /**
      * Get authorId
      *
-     * @return int
+     * @return integer
      */
     public function getAuthorId()
     {
@@ -144,7 +144,7 @@ class Thread
      *
      * @return Thread
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -210,50 +210,26 @@ class Thread
     }
 
     /**
-     * Set categoeyId
+     * Set category
      *
-     * @param integer $categoeyId
+     * @param \Tfe\ForumBundle\Entity\Category $category
      *
      * @return Thread
      */
-    public function setCategoeyId($categoeyId)
+    public function setCategory(\Tfe\ForumBundle\Entity\Category $category)
     {
-        $this->categoeyId = $categoeyId;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get categoeyId
+     * Get category
      *
-     * @return int
+     * @return \Tfe\ForumBundle\Entity\Category
      */
-    public function getCategoeyId()
+    public function getCategory()
     {
-        return $this->categoeyId;
-    }
-
-    /**
-     * Set groupId
-     *
-     * @param integer $groupId
-     *
-     * @return Thread
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Get groupId
-     *
-     * @return int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
+        return $this->category;
     }
 }
