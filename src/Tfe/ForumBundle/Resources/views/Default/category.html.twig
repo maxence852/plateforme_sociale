@@ -53,9 +53,9 @@
             </div>
             <div class="panel-body panel-list-group">
                 <div class="list-group">
-
-                    <a  href="" class="list-group-item"></a>
-
+                {%  for thread in threads  %}
+                    <a  href="" class="list-group-item">{{ thread.title }}</a>
+                {% endfor %}
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <h4 class="modal-title">New Thread</h4>
                 </div>
                 <div class="modal-body">
-                    {{ form_start(form, {'method': 'post','action':'thread_add'}) }}
+                    {{ form_start(form)}}
                     {{ form_errors(form) }}
 
                     <div class="form-group">

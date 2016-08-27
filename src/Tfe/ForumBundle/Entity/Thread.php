@@ -32,7 +32,7 @@ class Thread
     /**
      * @var int
      *
-     * @ORM\Column(name="author_id", type="integer")
+     * @ORM\Column(name="author_id", type="integer", nullable=true)
      */
     private $authorId;
 
@@ -53,14 +53,14 @@ class Thread
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updateAt", type="datetime")
+     * @ORM\Column(name="updateAt", type="datetime", nullable=true)
      */
     private $updateAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="string", length=255)
+     * @ORM\Column(name="body", type="string", length=255, nullable=true)
      */
     private $body;
 

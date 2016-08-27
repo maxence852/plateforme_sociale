@@ -22,14 +22,21 @@ class CategoryController extends Controller
         $thread = new Thread();
 
         $form = $this->get('form.factory')->createBuilder(FormType::class, $thread)
+            ->setAction($this->generateUrl('tfe_add_thread'))
+            ->setMethod('POST')
             ->add('title', TextType::class, array(
                 'required'    => false))
             ->add('save',      SubmitType::class)
             ->getForm()
         ;
+        $threads = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('TfeForumBundle:Thread')
+            ->myFindAllThread();
         return $this->render('TfeForumBundle:Default:category.html.twig',array(
             'category'=> $category,
-            'form'=> $form->createView()
+            'form'=> $form->createView(),
+            'threads'=> $threads
         ));
 
     }
@@ -39,8 +46,8 @@ class CategoryController extends Controller
 
         /********** Enregistrement d'une nouvelle Categorie ds le forum ********************/
         $categoryId = $_POST["categoryId"];
-        return $this->redirectToRoute('tfe_user_homepage');
-        /*
+
+
         $thread = new Thread();
         $form = $this->get('form.factory')->createBuilder(FormType::class, $thread)
             ->add('title', TextType::class, array(
@@ -59,12 +66,13 @@ class CategoryController extends Controller
 
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('notice', 'thread bien enregistrée.');
-                //return $this->indexAction($categoryId);
+                return $this->indexAction($categoryId);
             }
         }
 
-        return $this->redirectToRoute('tfe_user_homepage');
-        */
+
+       // return $this->redirectToRoute('tfe_user_homepage');
+
 
     }
 

@@ -10,4 +10,18 @@ namespace Tfe\ForumBundle\Repository;
  */
 class ThreadRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function myFindAllThread()
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        //$qb->select('a.title,a.id');
+
+        $qb->orderBy('a.title', 'ASC');
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
+
