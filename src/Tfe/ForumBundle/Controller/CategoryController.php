@@ -5,6 +5,7 @@ namespace Tfe\ForumBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Tfe\ForumBundle\Entity\Category;
@@ -26,13 +27,15 @@ class CategoryController extends Controller
             ->setMethod('POST')
             ->add('title', TextType::class, array(
                 'required'    => false))
+            ->add('body', TextareaType::class, array(
+                'required' => true))
             ->add('save',      SubmitType::class)
             ->getForm()
         ;
         $threads = $this->getDoctrine()
             ->getManager()
             ->getRepository('TfeForumBundle:Thread')
-            ->myFindAllThread();
+            ->myFindAllThread($category);
         return $this->render('TfeForumBundle:Default:category.html.twig',array(
             'category'=> $category,
             'form'=> $form->createView(),
@@ -52,6 +55,8 @@ class CategoryController extends Controller
         $form = $this->get('form.factory')->createBuilder(FormType::class, $thread)
             ->add('title', TextType::class, array(
                 'required'    => true))
+            ->add('body', TextareaType::class, array(
+                'required' => true))
             ->add('save',      SubmitType::class)
             ->getForm()
         ;

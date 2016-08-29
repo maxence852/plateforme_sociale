@@ -54,7 +54,7 @@
             <div class="panel-body panel-list-group">
                 <div class="list-group">
                 {%  for thread in threads  %}
-                    <a  href="" class="list-group-item">{{ thread.title }}</a>
+                    <a  href="{{ path('tfe_forum_thread', {'id': thread.id}) }}" class="list-group-item">{{ thread.title }}</a>
                 {% endfor %}
                 </div>
             </div>
@@ -80,9 +80,12 @@
                         {{ form_label(form.title,"") }}
                         {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form.title) }}
-                        <input type="text" name="categoryId" id="categoryId"/>
-                        <p></p>
-
+                        </div>
+                        <div class="form-group">
+                        {{ form_label(form.body,"") }}
+                        {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.body) }}
+                        <input type="hidden" name="categoryId" id="categoryId"/>
                     </div>
 
                 </div>

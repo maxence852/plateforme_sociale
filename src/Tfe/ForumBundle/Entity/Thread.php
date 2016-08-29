@@ -30,11 +30,10 @@ class Thread
     private $title;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="author_id", type="integer", nullable=true)
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="thread")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $authorId;
+    private $author;
 
     /**
      * @var \DateTime
@@ -63,6 +62,11 @@ class Thread
      * @ORM\Column(name="body", type="string", length=255, nullable=true)
      */
     private $body;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Comment", mappedBy="thread", cascade={"persist"})
+     */
+    private $comment;
 
     /**
      ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Category", cascade={"persist"}, inversedBy="thread")
@@ -231,5 +235,63 @@ class Thread
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Tfe\ForumBundle\Entity\Comment $comment
+     *
+     * @return Thread
+     */
+    public function addComment(\Tfe\ForumBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Tfe\ForumBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Tfe\ForumBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Tfe\UserBundle\Entity\Users $author
+     *
+     * @return Thread
+     */
+    public function setAuthor(\Tfe\UserBundle\Entity\Users $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

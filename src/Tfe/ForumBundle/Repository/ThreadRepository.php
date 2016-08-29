@@ -10,18 +10,37 @@ namespace Tfe\ForumBundle\Repository;
  */
 class ThreadRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function myFindAllThread()
+    public function myFindAllThread($cat)
     {
         $qb = $this->createQueryBuilder('a');
 
         //$qb->select('a.title,a.id');
-
-        $qb->orderBy('a.title', 'ASC');
+        $qb->where('a.category = :cat')
+            ->setParameter('cat', $cat)
+        ->orderBy('a.title', 'ASC');
 
         return $qb
             ->getQuery()
             ->getResult()
             ;
     }
+
+    /*
+     * public function myFindAllByGroup($groupId)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->select('a.title,a.id');
+        $qb->where('a.groupe = :gpId')
+            ->setParameter('gpId', $groupId);
+        $qb->orderBy('a.title', 'ASC');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+
+
+    }
+     */
 }
 

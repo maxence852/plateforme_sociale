@@ -30,11 +30,10 @@ class Category
     private $title;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="author_id", type="integer", unique=true, nullable=true)
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="category")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $authorId;
+    private $author;
 
     /**
      * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Thread", mappedBy="category", cascade={"persist"})
@@ -235,5 +234,29 @@ class Category
     public function getGroupe()
     {
         return $this->groupe;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Tfe\UserBundle\Entity\Users $author
+     *
+     * @return Category
+     */
+    public function setAuthor(\Tfe\UserBundle\Entity\Users $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

@@ -28,33 +28,19 @@ class Comment
      */
     private $body;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="category_id", type="integer")
-     */
-    private $categoryId;
+    
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="group_id", type="integer")
+     ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Thread", cascade={"persist"}, inversedBy="comment")
+     ** @ORM\JoinColumn(nullable=false)
      */
-    private $groupId;
+    private $thread;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="thread_id", type="integer")
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="comment")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $threadId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="author_id", type="integer")
-     */
-    private $authorId;
+    private $author;
 
     /**
      * @var \DateTime
@@ -74,7 +60,7 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable= true)
      */
     private $updatedAt;
 
@@ -113,53 +99,7 @@ class Comment
         return $this->body;
     }
 
-    /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     *
-     * @return Comment
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
 
-        return $this;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return int
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
-
-    /**
-     * Set groupId
-     *
-     * @param integer $groupId
-     *
-     * @return Comment
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Get groupId
-     *
-     * @return int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
 
     /**
      * Set threadId
@@ -174,40 +114,7 @@ class Comment
 
         return $this;
     }
-
-    /**
-     * Get threadId
-     *
-     * @return int
-     */
-    public function getThreadId()
-    {
-        return $this->threadId;
-    }
-
-    /**
-     * Set authorId
-     *
-     * @param integer $authorId
-     *
-     * @return Comment
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
-
-    /**
-     * Get authorId
-     *
-     * @return int
-     */
-    public function getAuthorId()
-    {
-        return $this->authorId;
-    }
+    
 
     /**
      * Set createdAt
@@ -255,5 +162,53 @@ class Comment
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set thread
+     *
+     * @param \Tfe\ForumBundle\Entity\Thread $thread
+     *
+     * @return Comment
+     */
+    public function setThread(\Tfe\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread = $thread;
+
+        return $this;
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \Tfe\ForumBundle\Entity\Thread
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Tfe\UserBundle\Entity\Users $author
+     *
+     * @return Comment
+     */
+    public function setAuthor(\Tfe\UserBundle\Entity\Users $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

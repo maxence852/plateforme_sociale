@@ -14,3 +14,11 @@ tfe_forum_category:
 tfe_add_thread:
     path:     /thread_add
     defaults: { _controller: TfeForumBundle:Category:addThread }
+
+tfe_forum_thread:
+    path:     /thread/{id}
+    defaults: { _controller: TfeForumBundle:Thread:index }
+
+tfe_delete_comment:
+    path: /comment/delete/{idComment}/{idThread}
+    defaults: { _controller: TfeForumBundle:Thread:deleteComment }

@@ -243,7 +243,25 @@ class Users extends BaseUser
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Groupe", mappedBy="author", cascade={"persist"})
+     */
+    private $group;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Category", mappedBy="author", cascade={"persist"})
+     */
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Thread", mappedBy="author", cascade={"persist"})
+     */
+    private $thread;
+
+    /**
+ * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Comment", mappedBy="author", cascade={"persist"})
+ */
+    private $comment;
 
 
     /**
@@ -732,5 +750,131 @@ class Users extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Add thread
+     *
+     * @param \Tfe\ForumBundle\Entity\Thread $thread
+     *
+     * @return Users
+     */
+    public function addThread(\Tfe\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread[] = $thread;
+
+        return $this;
+    }
+
+    /**
+     * Remove thread
+     *
+     * @param \Tfe\ForumBundle\Entity\Thread $thread
+     */
+    public function removeThread(\Tfe\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread->removeElement($thread);
+    }
+
+    /**
+     * Get thread
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * Set thread
+     *
+     * @param \DateTime $thread
+     *
+     * @return Users
+     */
+    public function setThread($thread)
+    {
+        $this->thread = $thread;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \Tfe\ForumBundle\Entity\Category $category
+     *
+     * @return Users
+     */
+    public function addCategory(\Tfe\ForumBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Tfe\ForumBundle\Entity\Category $category
+     */
+    public function removeCategory(\Tfe\ForumBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Tfe\ForumBundle\Entity\Comment $comment
+     *
+     * @return Users
+     */
+    public function addComment(\Tfe\ForumBundle\Entity\Comment $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Tfe\ForumBundle\Entity\Comment $comment
+     */
+    public function removeComment(\Tfe\ForumBundle\Entity\Comment $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

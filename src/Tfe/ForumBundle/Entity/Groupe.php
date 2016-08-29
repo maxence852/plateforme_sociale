@@ -31,11 +31,10 @@ class Groupe
     private $title;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="author_id", type="integer", nullable=true )
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="group")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $authorId;
+    private $author;
 
     /**
      * @var \DateTime
@@ -212,5 +211,29 @@ class Groupe
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \Tfe\UserBundle\Entity\Users $author
+     *
+     * @return Groupe
+     */
+    public function setAuthor(\Tfe\UserBundle\Entity\Users $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
