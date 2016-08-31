@@ -2,7 +2,9 @@
  #   resource: "@TfeRestBundle/Resources/config/routing.yml"
   #  prefix:   /rest
 
-
+tfe_contact_page:
+    resource: "@TfeCoreBundle/Resources/config/routing.yml"
+    prefix:   /contact
 tfe_user_homepage:
     resource: "@TfeUserBundle/Resources/config/routing.yml"
     prefix:   /

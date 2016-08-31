@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
 
     }
+
+    public function ContactAction()
+    {
+        return $this->render('TfeCoreBundle:Contact:contact.html.twig');
+    }
 }
