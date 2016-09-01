@@ -45,13 +45,13 @@
                         <li><a href="{{ path('fos_user_security_login') }}" style="color: white">Connexion</a></li>
                         <li><a href="{{ path('fos_user_registration_register') }}" style="color: white">inscription</a></li>
                     {% endif %}
-                    <li class="dropdown" style="background-color: #404040">
+                    <li class="dropdown">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
                             {{ app.user.username }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="background-color: #404040">
-                            <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-btn"></i>Paramètre du compte</a></li>
+                            <li><a href="{{ path('fos_user_profile_show') }}" style="color: white"><i class="fa fa-btn"></i>Paramètre du compte</a></li>
                         </ul>
                          {% endif %}
                 </ul>

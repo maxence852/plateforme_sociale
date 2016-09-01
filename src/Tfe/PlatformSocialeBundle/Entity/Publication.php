@@ -23,11 +23,10 @@ class Publication
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="userId", type="integer", nullable=true)
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="publication")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $userId;
+    private $user;
 
     /**
      * @var int
@@ -292,5 +291,29 @@ class Publication
     public function getDatePublication()
     {
         return $this->datePublication;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Tfe\UserBundle\Entity\Users $user
+     *
+     * @return Publication
+     */
+    public function setUser(\Tfe\UserBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

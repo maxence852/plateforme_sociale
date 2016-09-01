@@ -36,7 +36,7 @@ class Category
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Thread", mappedBy="category", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Thread", mappedBy="category", cascade={"persist", "remove"})
      */
     private $thread;
 

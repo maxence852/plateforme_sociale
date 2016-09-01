@@ -25,6 +25,11 @@ class ThreadRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
+    public function deleteThread($idThread)
+    {
+
+    }
+
     /*
      * public function myFindAllByGroup($groupId)
     {

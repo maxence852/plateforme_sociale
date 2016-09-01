@@ -22,3 +22,16 @@ tfe_forum_thread:
 tfe_delete_comment:
     path: /comment/delete/{idComment}/{idThread}
     defaults: { _controller: TfeForumBundle:Thread:deleteComment }
+
+tfe_delete_thread:
+    path: /thread/delete/{idThread}
+    defaults: { _controller: TfeForumBundle:Thread:deleteThread }
+
+tfe_delete_category:
+    path: /category/delete/{categoryId}
+    defaults: { _controller: TfeForumBundle:Category:deleteCategory }
+
+tfe_delete_group:
+    path: /groupe/delete
+    defaults: { _controller: TfeForumBundle:Default:deleteGroup }
+

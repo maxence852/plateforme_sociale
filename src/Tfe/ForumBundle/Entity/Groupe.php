@@ -50,7 +50,7 @@ class Groupe
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Category", mappedBy="groupe", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Category", mappedBy="groupe", cascade={"persist", "remove"})
      */
 
     private $category;

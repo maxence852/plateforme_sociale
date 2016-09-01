@@ -31,6 +31,10 @@ class DefaultController extends Controller
             ->add('save',      SubmitType::class)
             ->getForm()
         ;
+        $form2 = $this->get('form.factory')->createBuilder(FormType::class, $group)
+            ->add('save',      SubmitType::class)
+            ->getForm()
+        ;
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -69,6 +73,7 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'groups'=> $groups,
             'form1' => $form1->createView(),
+            'form2' => $form2->createView()
         ));
 
 
@@ -134,5 +139,18 @@ class DefaultController extends Controller
         ));
     }
 
+    public function deleteGroupAction()
+    {
+        $groupId = $_POST["groupIdToDel"];
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em ->getRepository('TfeForumBundle:Groupe');
+        $groupe = $rep->find($groupId);
+
+        $em->remove($groupe);
+        $em->flush();
+        return $this->redirectToRoute('tfe_forum_homepage');
+
+
+    }
 
 }

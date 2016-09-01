@@ -41,6 +41,7 @@ class ProfileFormType extends AbstractType
 
         $builder->add('firstname', TextType::class, array(
             'label' => 'profile.show.firstname',
+            'required'    => false,
             'translation_domain' => 'FOSUserBundle'));
 
         $builder->add('age', NumberType::class, array(

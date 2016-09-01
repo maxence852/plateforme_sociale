@@ -31,7 +31,7 @@ class Comment
     
 
     /**
-     ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Thread", cascade={"persist"}, inversedBy="comment")
+     ** @ORM\ManyToOne(targetEntity="Tfe\ForumBundle\Entity\Thread",cascade={"persist"}, inversedBy="comment")
      ** @ORM\JoinColumn(nullable=false)
      */
     private $thread;

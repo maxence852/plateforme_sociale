@@ -13,7 +13,7 @@
 <li class="active">{{ thread.title }}</li>
 </ol>
 
-<a href="" class="btn btn-danger pull-right"> Delete</a>
+<a href="{{ path('tfe_delete_thread', {'idThread' :  thread.id}) }}" class="btn btn-danger pull-right"> Supprimer le topic </a>
 
 </div>
 <div class="well">
@@ -21,6 +21,9 @@
     <h4> By  {{ thread.author }}: on {{ thread.createdAt|date("d/m/Y H:i e") }} </h4> <!-- $author pointe dans ForumController  function thread($id) qui récupère le nom de l'utilisateur qui a écris le msg.-->
     <hr style="border-color: #d58512">
     <p>{{ thread.body }}</p>
+    {% if thread.author.signature != ""  %}
+        <p style="color:red;">{{ thread.author.signature }}</p>
+    {% endif %}
     <hr style="border-color: #d58512"/>
 
 </div>
@@ -30,7 +33,10 @@
     <h4> By  {{ comment.author }}:  on {{ comment.createdAt|date("d/m/Y H:i e") }} </h4> <!-- $author pointe dans ForumController  function thread($id) qui récupère le nom de l'utilisateur qui a écris le msg.-->
     <hr style="border-color: #d58512"/>
     <p>{{ comment.body }}</p>
-    <a href="{{ path('tfe_delete_comment', {'idComment': comment.id ,'idThread' :  thread.id}) }}"  class="btn btn-danger">Delete</a>
+    {% if comment.author.signature != ""  %}
+        <p style="color:red;">{{ comment.author.signature }}</p>
+    {% endif %}
+    <a href="{{ path('tfe_delete_comment', {'idComment': comment.id ,'idThread' :  thread.id}) }}"  class="btn btn-danger">Supprimer le commentaire</a>
 </div>
 {% endfor %}
 

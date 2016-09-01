@@ -32,7 +32,7 @@
      #}
 
      <div>
-          <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Add Group</a>
+          <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Ajouter un groupe</a>
      </div>
 {% for group in groups %}
 <div class="panel panel-primary">
@@ -41,8 +41,8 @@
           <div class="clearfix">
                <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>
                <!-- bouton supprimer et ajouter groupe discussion-->
-               <a id="group_{{  group.id}}" href="" onclick="setGroupId({{ group.id }});" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">New Category</a>
-               <a id="" href="#" data-toggle="modal" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer</a>
+               <a id="group_{{  group.id}}" href="" onclick="setGroupId({{ group.id }});" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">Nouvelle catégorie</a>
+               <a id="" href="#" data-toggle="modal" onclick="setGroupId({{ group.id }});" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer le groupe</a>
           </div>
 
           <div class="clearfix">
@@ -154,15 +154,25 @@
                               <span aria-hidden="true">&times;</span>
                               <span class="sr-only">Close</span>
                          </button>
-                         <h4 class="modal-title">Supprimer le groupe de discussion</h4>
+                         <h3>Etes-vous sûr de vouloir supprimer ce groupe de discussion ?</h3>
                     </div>
                     <div class="modal-body">
-                         <h3>Etes-vous sûr de vouloir supprimer ce groupe de discussion ?</h3>
-                         <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                              <a href="#" type="button" class="btn btn-primary" id="btn_delete_group">Supprimer</a>
+                         {{ form_start(form2, {'method': 'post','action':'groupe/delete'}) }}
+                         {{ form_errors(form2) }}
+                         <div class="form-group">
+                              <input type="text" name="groupIdToDel" id="groupIdToDel"/>
                          </div>
+
                     </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                         {{ form_widget(form2.save,{'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_rest(form2) }}
+                    {{ form_end(form2) }}
+
+
+
                </div>
           </div>
      </div>

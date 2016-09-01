@@ -1,6 +1,7 @@
 <?php
 namespace Tfe\PlatformSocialeBundle\Controller;
 
+use Proxies\__CG__\Tfe\UserBundle\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -47,6 +48,10 @@ class PublicationController extends Controller
             }
         }
         /********************post publication fin******************************/
+
+
+
+
 
             return $this->render('TfePlatformSocialeBundle:Publications:publications.html.twig', array(
                 'publication' => $publicationGet,

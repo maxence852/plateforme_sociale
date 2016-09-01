@@ -43,7 +43,7 @@
                         -{{  category.title}}
                         -{{  category.id}}</h3>
                     <!-- bouton supprimer groupe discussion-->
-                    <a id="" href="#" data-toggle="modal" data-target="#category_delete" class="btn btn-danger btn-xs pull-right delete_category">Supprimer</a>
+                    <a id="" href="#" data-toggle="modal" data-target="#category_delete" class="btn btn-danger btn-xs pull-right delete_category">Supprimer Categorie</a>
                 </div>
 
                 <div class="clearfix">
@@ -115,7 +115,7 @@
                         <h3>Are you sure you want to delete this category.</h3>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            <a href="" type="button" class="btn btn-primary" id="btn_delete_category">Supprimer</a>
+                            <a href="{{ path('tfe_delete_category', {'categoryId' :  category.id}) }}" type="button" class="btn btn-primary" id="btn_delete_category">Supprimer</a>
                         </div>
                     </div>
                 </div>

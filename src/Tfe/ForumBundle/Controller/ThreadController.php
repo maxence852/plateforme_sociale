@@ -62,15 +62,27 @@ class ThreadController extends Controller
         $rep = $em ->getRepository('TfeForumBundle:Thread');
         $thread = $rep->find($idThread);
         foreach ($thread->getComment() as $comment) {
-            if($comment->getId()==$idComment) {
+            if($comment->getId()==$idComment && $comment->getAuthor()==$this->getUser()) {
                 $thread->removeComment($comment);
 
                 $em->flush();
-
-                return $this->redirectToRoute('tfe_user_homepage');
             }
         }
         return $this->indexAction($idThread,$request);
+
+    }
+    public function deleteThreadAction($idThread, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em ->getRepository('TfeForumBundle:Thread');
+        $thread = $rep->find($idThread);
+        $idCat = $thread->getCategory()->getId();
+        $em->remove($thread);
+        $em->flush();
+        return $this->redirectToRoute('tfe_forum_category',array(
+            'id'=> $idCat
+        ));
+
 
     }
 

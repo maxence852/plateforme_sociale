@@ -42,13 +42,6 @@ class Thread
      */
     private $createdAt;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->createdAt = new \Datetime();
-    }
 
     /**
      * @var \DateTime
@@ -64,7 +57,7 @@ class Thread
     private $body;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Comment", mappedBy="thread", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Tfe\ForumBundle\Entity\Comment", mappedBy="thread", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $comment;
 
@@ -82,6 +75,14 @@ class Thread
     private $groupId;
 */
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comment = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -115,30 +116,6 @@ class Thread
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set authorId
-     *
-     * @param integer $authorId
-     *
-     * @return Thread
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
-
-    /**
-     * Get authorId
-     *
-     * @return integer
-     */
-    public function getAuthorId()
-    {
-        return $this->authorId;
     }
 
     /**
@@ -214,27 +191,27 @@ class Thread
     }
 
     /**
-     * Set category
+     * Set author
      *
-     * @param \Tfe\ForumBundle\Entity\Category $category
+     * @param \Tfe\UserBundle\Entity\Users $author
      *
      * @return Thread
      */
-    public function setCategory(\Tfe\ForumBundle\Entity\Category $category)
+    public function setAuthor(\Tfe\UserBundle\Entity\Users $author = null)
     {
-        $this->category = $category;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Get author
      *
-     * @return \Tfe\ForumBundle\Entity\Category
+     * @return \Tfe\UserBundle\Entity\Users
      */
-    public function getCategory()
+    public function getAuthor()
     {
-        return $this->category;
+        return $this->author;
     }
 
     /**
@@ -272,26 +249,26 @@ class Thread
     }
 
     /**
-     * Set author
+     * Set category
      *
-     * @param \Tfe\UserBundle\Entity\Users $author
+     * @param \Tfe\ForumBundle\Entity\Category $category
      *
      * @return Thread
      */
-    public function setAuthor(\Tfe\UserBundle\Entity\Users $author)
+    public function setCategory(\Tfe\ForumBundle\Entity\Category $category)
     {
-        $this->author = $author;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Get author
+     * Get category
      *
-     * @return \Tfe\UserBundle\Entity\Users
+     * @return \Tfe\ForumBundle\Entity\Category
      */
-    public function getAuthor()
+    public function getCategory()
     {
-        return $this->author;
+        return $this->category;
     }
 }

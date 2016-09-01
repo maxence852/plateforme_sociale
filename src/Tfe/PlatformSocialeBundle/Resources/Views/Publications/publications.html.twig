@@ -37,6 +37,7 @@
             <dl class="text-center" id="bordurePublication">
                 <dt id="titrePublication">{{ publications.titrePublication }}</dt>
                 <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <dd>{{ publications.user.username }}</dd>
             </dl>
         </div>
         {% endfor %}
