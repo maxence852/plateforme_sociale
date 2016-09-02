@@ -11,6 +11,10 @@ tfe_platform_sociale_publication:
     path:     /publications
     defaults: { _controller: TfePlatformSocialeBundle:Publication:Publications }
 
+tfe_platform_sociale_publication_keywords:
+    path:     /publications/keywords
+    defaults: { _controller: TfePlatformSocialeBundle:Publication:PublicationsKeywords }
+
 tfe_api_:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc

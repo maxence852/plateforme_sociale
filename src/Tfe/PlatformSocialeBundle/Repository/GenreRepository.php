@@ -10,4 +10,13 @@ namespace Tfe\PlatformSocialeBundle\Repository;
  */
 class GenreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->orderBy('a.nameGenre', 'ASC');
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

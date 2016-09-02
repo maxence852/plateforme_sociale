@@ -29,11 +29,10 @@ class Publication
     private $user;
 
     /**
-     * @var int
+     ** @ORM\ManyToMany(targetEntity="Tfe\PlatformSocialeBundle\Entity\Genre", cascade={"persist"})
      *
-     * @ORM\Column(name="genreId", type="integer", nullable=true)
      */
-    private $genreId;
+    private $genres;
 
     /**
      * @var string
@@ -94,53 +93,9 @@ class Publication
         return $this->id;
     }
 
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return Publication
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
 
-        return $this;
-    }
 
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 
-    /**
-     * Set genreId
-     *
-     * @param integer $genreId
-     *
-     * @return Publication
-     */
-    public function setGenreId($genreId)
-    {
-        $this->genreId = $genreId;
-
-        return $this;
-    }
-
-    /**
-     * Get genreId
-     *
-     * @return int
-     */
-    public function getGenreId()
-    {
-        return $this->genreId;
-    }
 
     /**
      * Set titrePublication
@@ -315,5 +270,39 @@ class Publication
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add genre
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\Genre $genre
+     *
+     * @return Publication
+     */
+    public function addGenre(\Tfe\PlatformSocialeBundle\Entity\Genre $genre)
+    {
+        $this->genres[] = $genre;
+
+        return $this;
+    }
+
+    /**
+     * Remove genre
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\Genre $genre
+     */
+    public function removeGenre(\Tfe\PlatformSocialeBundle\Entity\Genre $genre)
+    {
+        $this->genres->removeElement($genre);
+    }
+
+    /**
+     * Get genres
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGenres()
+    {
+        return $this->genres;
     }
 }

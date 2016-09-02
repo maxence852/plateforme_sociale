@@ -31,17 +31,6 @@
     {% endblock %}
 {% block body %}
 
-
-    {% for publications in publication %}
-        <div>
-            <dl class="text-center" id="bordurePublication">
-                <dt id="titrePublication">{{ publications.titrePublication }}</dt>
-                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
-                <dd>{{ publications.user.username }}</dd>
-            </dl>
-        </div>
-        {% endfor %}
-
     <div class="container">
         <div class="fos_user_user_show">
             <div class="row">
@@ -60,6 +49,20 @@
                                             {{ form_widget(form.titrePublication, {'attr': {'class': 'form-control'}}) }}
                                         </div>
                                         {{ form_errors(form.titrePublication) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.motsCles,"Mot clès (séparer par des ';') ", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                        <div class="col-md-6">
+                                            {{ form_widget(form.motsCles, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                        {{ form_errors(form.motsCles) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.genres,"Genres", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                        <div class="col-md-6">
+                                            {{ form_widget(form.genres) }}
+                                        </div>
+                                        {{ form_errors(form.genres) }}
                                     </div>
                                     <div class="form-group">
                                         {{ form_label(form.contentPublication,"Publication", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
@@ -84,6 +87,37 @@
     {{ form_rest(form) }}
     {{ form_widget(form)  }}
     {{ form_end(form) }}
+
+
+    <div class="form-inline text-center" >
+        <div class="form-group">
+            {{ form_start(form2, {'method': 'post'}) }}
+            {{ form_label(form2.keywords,"Rechercher via mots clés", {'label_attr': {'class': 'control-label '}}) }}
+            <div class="input-group">
+                {{ form_widget(form2.keywords, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form2.keywords) }}
+            </div>
+        </div>
+        {{ form_widget(form2.RechercheKeywors, {'attr': {'class': 'btn btn-primary glyphicon glyphicon-search'}}) }}
+        {{ form_rest(form2) }}
+        {{ form_widget(form2)  }}
+        {{ form_end(form2) }}
+    </div>
+
+    {% for publications in publication %}
+        <div>
+            <dl class="text-center" id="bordurePublication">
+                <dt id="titrePublication">{{ publications.titrePublication }}</dt>
+                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <dd>{{ publications.user.username }}</dd>
+                {% for genre  in  publications.genres%}
+                <dd>{{genre.nameGenre }}</dd>
+                    {% endfor %}
+            </dl>
+        </div>
+        {% endfor %}
+
+
 
     {{'[b]Bold text[/b]'|bbcode_filter('my_default_filter')}}
     {{'[u]Underlined text[/u]'|bbcode_filter('my_default_filter')}}
