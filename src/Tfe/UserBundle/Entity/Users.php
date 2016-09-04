@@ -268,6 +268,11 @@ class Users extends BaseUser
      */
     private $publication;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\PlatformSocialeBundle\Entity\CommentPublication", mappedBy="user", cascade={"persist"})
+     */
+    private $commentPublication;
+
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -915,5 +920,39 @@ class Users extends BaseUser
     public function getPublication()
     {
         return $this->publication;
+    }
+
+    /**
+     * Add commentPublication
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\CommentPublication $commentPublication
+     *
+     * @return Users
+     */
+    public function addCommentPublication(\Tfe\PlatformSocialeBundle\Entity\CommentPublication $commentPublication)
+    {
+        $this->commentPublication[] = $commentPublication;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentPublication
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\CommentPublication $commentPublication
+     */
+    public function removeCommentPublication(\Tfe\PlatformSocialeBundle\Entity\CommentPublication $commentPublication)
+    {
+        $this->commentPublication->removeElement($commentPublication);
+    }
+
+    /**
+     * Get commentPublication
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentPublication()
+    {
+        return $this->commentPublication;
     }
 }

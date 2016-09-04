@@ -70,6 +70,11 @@ class Publication
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tfe\PlatformSocialeBundle\Entity\CommentPublication", mappedBy="publication", cascade={"persist", "remove"})
+     */
+    private $comment;
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
@@ -83,6 +88,19 @@ class Publication
     private $updatedAt;
 
 
+    /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return Publication
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
     /**
      * Get id
      *
@@ -304,5 +322,39 @@ class Publication
     public function getGenres()
     {
         return $this->genres;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\CommentPublication $comment
+     *
+     * @return Publication
+     */
+    public function addComment(\Tfe\PlatformSocialeBundle\Entity\CommentPublication $comment)
+    {
+        $this->comment[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\CommentPublication $comment
+     */
+    public function removeComment(\Tfe\PlatformSocialeBundle\Entity\CommentPublication $comment)
+    {
+        $this->comment->removeElement($comment);
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

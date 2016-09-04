@@ -21,31 +21,25 @@ class CommentPublication
      */
     private $id;
 
+
+
     /**
-     * @var int
-     *
-     * @ORM\Column(name="publicationId", type="integer")
+     ** @ORM\ManyToOne(targetEntity="Tfe\UserBundle\Entity\Users", cascade={"persist"}, inversedBy="commentPublication")
+     ** @ORM\JoinColumn(nullable=true)
      */
-    private $publicationId;
+    private $user;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="userId", type="integer")
-     */
-    private $userId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="userEnabledId", type="integer")
+     * @ORM\Column(name="userEnabledId", type="integer", nullable=true)
      */
     private $userEnabledId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="commentParentId", type="integer")
+     * @ORM\Column(name="commentParentId", type="integer", nullable=true)
      */
     private $commentParentId;
 
@@ -59,7 +53,7 @@ class CommentPublication
     /**
      * @var bool
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
     private $enabled;
 
@@ -70,15 +64,17 @@ class CommentPublication
      */
     private $createdAt;
 
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
+        $this->dateEnabled = new \DateTime();
     }
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="update_at", type="datetime")
+     * @ORM\Column(name="update_at", type="datetime", nullable=true)
      */
     private $updateAt;
 
@@ -89,7 +85,11 @@ class CommentPublication
      */
     private $dateEnabled;
 
-
+    /**
+     ** @ORM\ManyToOne(targetEntity="Tfe\PlatformSocialeBundle\Entity\Publication", cascade={"persist"}, inversedBy="comment")
+     ** @ORM\JoinColumn(nullable=false)
+     */
+    private $publication;
     /**
      * Get id
      *
@@ -100,53 +100,9 @@ class CommentPublication
         return $this->id;
     }
 
-    /**
-     * Set publicationId
-     *
-     * @param integer $publicationId
-     *
-     * @return CommentPublication
-     */
-    public function setPublicationId($publicationId)
-    {
-        $this->publicationId = $publicationId;
 
-        return $this;
-    }
 
-    /**
-     * Get publicationId
-     *
-     * @return int
-     */
-    public function getPublicationId()
-    {
-        return $this->publicationId;
-    }
 
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     *
-     * @return CommentPublication
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
 
     /**
      * Set userEnabledId
@@ -314,5 +270,52 @@ class CommentPublication
     {
         return $this->dateEnabled;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \Tfe\UserBundle\Entity\Users $user
+     *
+     * @return CommentPublication
+     */
+    public function setUser(\Tfe\UserBundle\Entity\Users $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Tfe\UserBundle\Entity\Users
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set publication
+     *
+     * @param \Tfe\PlatformSocialeBundle\Entity\Publication $publication
+     *
+     * @return CommentPublication
+     */
+    public function setPublication(\Tfe\PlatformSocialeBundle\Entity\Publication $publication = null)
+    {
+        $this->publication = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Get publication
+     *
+     * @return \Tfe\PlatformSocialeBundle\Entity\Publication
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
+}

@@ -7,7 +7,7 @@
 {% block header %}
     {{ parent() }}
     <style rel="stylesheet">/* obligé de faire comme sa car l'autre csss va pas'*/
-        #bordurePublication
+        .bordurePublication
         {
             height: auto;
             border: 2px solid #F5871F;
@@ -32,7 +32,7 @@
 {% block body %}
 
 
-
+<h1> >>>  {{ kwd.keywords }}</h1>
     <div class="form-inline text-center" >
         <div class="form-group">
             {{ form_start(form2, {'method': 'post'}) }}
@@ -47,19 +47,66 @@
         {{ form_widget(form2)  }}
         {{ form_end(form2) }}
     </div>
-
     {% for publications in publication %}
         <div>
-            <dl class="text-center" id="bordurePublication">
+            <dl class="text-center bordurePublication">
                 <dt id="titrePublication">{{ publications.titrePublication }}</dt>
-                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br}} }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
                 <dd>{{ publications.user.username }}</dd>
                 {% for genre  in  publications.genres%}
                     <dd>{{genre.nameGenre }}</dd>
                 {% endfor %}
+                {% for comment in publications.comment %}
+                <dd>
+                    <dl class="bordurePublication">
+                <dt>Comment from {{comment.user.username}}</dt>
+                <dd>{{ comment.content }}</dd>
+                <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i e")}}</dd>
+            </dl>
+            </dd>
+            {% endfor %}
+            <dd><a id="publication_{{  publications.id}}" href="" onclick="setPublicationId({{ publications.id }});" data-toggle="modal" data-target="#comment_modal" class="btn btn-success btn-xs pull-right new_category">Commenter</a></dd>
             </dl>
         </div>
     {% endfor %}
+
+    <div class="modal fade" id="comment_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Fermer</span>
+                    </button>
+                    <h4 class="modal-title">Le commentaire</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form3) }}
+                    {{ form_errors(form3) }}
+
+                    <div class="form-group">
+                        {{ form_label(form3.content,"Label") }}
+                        {{ form_widget(form3.content, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form3.content) }}
+                        <input type="hidden" name="publicationId" id="publicationId"/>
+                        <input type="text" name="url" id="url" value="TfePlatformSocialeBundle:Publications:publicationKeyword.html.twig"/>
+                        <input type="text" name="route" id="route" value="2"/>
+                        <input type="text" name="kw" id="kw" value="{{ form2.keywords.vars.value }}"/>
+                        <p></p>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{ form_widget(form3.Commenter, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_rest(form3) }}
+                {{ form_end(form3) }}
+            </div>
+        </div>
+    </div>
 
 
 

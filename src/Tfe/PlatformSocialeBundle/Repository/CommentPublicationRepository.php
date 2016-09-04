@@ -10,4 +10,14 @@ namespace Tfe\PlatformSocialeBundle\Repository;
  */
 class CommentPublicationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCommentsFromPublication($idPublication)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->where("a.publication=".$idPublication);
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
