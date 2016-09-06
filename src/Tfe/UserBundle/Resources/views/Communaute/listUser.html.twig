@@ -60,7 +60,7 @@
                     {% set Unfound = 0 %}
                     {% for abonnement in abonnementsRepo  %}
                         {% if abonnement.suiviId == user.id %}
-                            <a class="btn btn-primary" href="{{ path('tfe_user_communaute_desabonnement', {'suiviId': user.id ,'suiveurId' :  app.user.id}) }}" style="background-color: red">Se désabonner</a>
+                            <a class="btn btn-danger" href="{{ path('tfe_user_communaute_desabonnement', {'suiviId': user.id ,'suiveurId' :  app.user.id}) }}">Se désabonner</a>
                             {% set Unfound = 1 %}
                         {% endif %}
                     {% endfor %}
@@ -70,7 +70,7 @@
                 </td>
             </tr>
         </tbody>
-        <tbody>
+
       {% endfor %}
 
     </table>
