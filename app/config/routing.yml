@@ -43,11 +43,11 @@ hwi_oauth_security:
 
 hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix: /connect
+    prefix: /login
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix: /connect
+    prefix: /login
 
 facebook_login:
     path: /login/check-facebook
