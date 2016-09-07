@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Tests\Extension\Core\Type\CheckboxTypeTest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Choice;
+use Tfe\ForumBundle\Entity\Comment;
 use Tfe\PlatformSocialeBundle\Entity\CommentPublication;
 use Tfe\PlatformSocialeBundle\Entity\Genre;
 use Tfe\PlatformSocialeBundle\Entity\Publication;
@@ -30,11 +31,11 @@ class PublicationController extends Controller
           //  ->getAllOrderedPublications($this->getDoctrine()->getManager());
          $userManager     = $this->getDoctrine()->getManager();
 
-        $sql = "select p.id, titrePublication,contentPublication, user_id, u.id AS userId, u.username, 'A' as suiveur from publication as p
+        $sql = "select p.id, titrePublication,contentPublication, user_id, u.id AS user_Id, u.username, 'A' as suiveur from publication as p
 	              INNER JOIN tfe_users as u ON u.id = user_id where p.user_id IN (select suiviId from abonnement_user
 	                where suiveurId = ". $this->getUser()->getId() .")
                 UNION
-                select p.id, titrePublication,contentPublication, user_id, u.id, u.username, 'B' as suiveur from publication as p
+                select p.id, titrePublication,contentPublication, user_id, u.id AS userId, u.username, 'B' as suiveur from publication as p
 	             INNER JOIN tfe_users as u ON u.id = user_id where p.user_id NOT IN (select suiviId from abonnement_user
 	                where suiveurId = ". $this->getUser()->getId() .")
                 ORDER BY suiveur, username, titrePublication ASC";
@@ -56,6 +57,7 @@ class PublicationController extends Controller
             }
             $user = new Users();
             $user->setUsername($pub['username']);
+            $user->setId($pub['user_id']);
             $publication->setId($pub['id']);
             $publication->setUser($user);
             $publication->setTitrePublication($pub['titrepublication']);
@@ -185,13 +187,21 @@ class PublicationController extends Controller
             }
         }
 
-*/
+*/      $publication = new Publication();
+        $form4 = $this->createFormBuilder($publication)
+            ->setAction($this->generateUrl('tfe_platform_sociale_delete_publication'))
+            ->setMethod('POST')
+            ->add('Supprimer',SubmitType::class, array(
+                'label'=> 'Envoyer'
+            ))
+            ->getForm();
             return $this->render('TfePlatformSocialeBundle:Publications:publications.html.twig', array(
                 //'publication' => $publicationGet,
                 'publication' => $publications,
                 'form' => $form->createView(),
                 'form2' => $form2->createView(),
                 'form3' => $form3->createView(),
+                'form4' => $form4->createView(),
 
             ));
 
@@ -403,7 +413,132 @@ class PublicationController extends Controller
         ));
     }
 
+    public function updatePublicationAction($id, Request $request)
+    {
+        /**************Genre littéraire ************************/
+        $genresGet = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('TfePlatformSocialeBundle:Genre')
+            ->findAll();
+
+        $allGenres = array();
+        foreach ($genresGet as $genre){
+            $allGenres[$genre->getNameGenre()]=$genre;
+        }
+
+        $publicationPost = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('TfePlatformSocialeBundle:Publication')
+            ->find($id);
+        //$publicationPost = new Publication();
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $publicationPost)
+            ->add('titrePublication', TextType::class, array(
+                'required'    => true))
+            ->add('motsCles',TextType::class,array(
+                'required' =>false))
+
+            ->add('contentPublication', TextareaType::class, array(
+                'required'    => true))
+            ->add('save',      SubmitType::class)
+            ->getForm()
+        ;
+
+        /**********post publication************************/
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $publicationPost->setUser($this->getUser());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($publicationPost);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'title bien enregistrée.');
+                return $this->redirectToRoute('tfe_platform_sociale_publication');
+            }
+        }
+
+        return $this->render('TfePlatformSocialeBundle:Publications:publicationEdit.html.twig', array(
+            //'publication' => $publicationGet,
+            'publication' => $publicationPost,
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function deletePublicationAction(Request $request)
+    {
+        $publication = new Publication();
+        $form4 = $this->createFormBuilder($publication)
+        ->setAction($this->generateUrl('tfe_platform_sociale_delete_publication'))
+        ->setMethod('POST')
+        ->add('Supprimer',SubmitType::class, array(
+            'label'=> 'Envoyer'
+        ))
+        ->getForm();
+        if ($request->isMethod('POST')) {
+            $form4->handleRequest($request);
+            if ($form4->isValid()) {
+                $pubicationId = $_POST["idPub"];
+                $em = $this->getDoctrine()->getManager();
+                $repo = $em->getRepository('TfePlatformSocialeBundle:Publication');
+                $pub = $repo->find($pubicationId);
+                $em->remove($pub);
+                $em->flush();
+
+            }
+        }
+        return $this->redirectToRoute('tfe_platform_sociale_publication');
+    }
+
+    public function PublicationUpdateCommentAction($id, Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('TfePlatformSocialeBundle:CommentPublication');
+        $comment = $repo->find($id);
+        $form3 = $this->createFormBuilder($comment)
+            ->setAction($this->generateUrl('tfe_platform_sociale_publication_updateComment',array('id' => $id)))
+            ->setMethod('POST')
+            ->add('content', TextType::class, array(
+                'required'    => false,))
+            ->add('Commenter',SubmitType::class, array(
+                'label'=> 'Envoyer'
+            ))
+            ->getForm();
+        if ($request->isMethod('POST')) {
+            $form3->handleRequest($request);
+            if ($form3->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($comment);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'commentaire bien enregistrée.');
+                return $this->redirectToRoute('tfe_platform_sociale_publication');
+            }
+        }
 
 
+        return $this->render('TfePlatformSocialeBundle:Publications:commentEdit.html.twig', array(
+            'form3' => $form3->createView(),
+
+        ));
+    }
+
+    public function PublicationDeleteCommentAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('TfePlatformSocialeBundle:CommentPublication');
+        $comment = $repo->find($id);
+        $em->remove($comment);
+        $em->flush();
+
+
+        return $this->redirectToRoute('tfe_platform_sociale_publication');
+    }
+    public function PointAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('TfeUserBundle:Users');
+        $user = $repo->find($id);
+        $user->setUserPoint($user->getUserPoint()+1);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('tfe_platform_sociale_publication');
+    }
 
 }

@@ -4,7 +4,7 @@
     Page des publications - {{ parent() }}
 {% endblock %}
 
-{% block header %}
+{% block styleHeader %}
     {{ parent() }}
     <style rel="stylesheet">/* obligé de faire comme sa car l'autre csss va pas'*/
         .bordurePublication
@@ -14,13 +14,13 @@
             margin-left: 350px;
             margin-right: 350px;
         }
-        #titrePublication
+        .titrePublication
         {
             color: #0088CC;
             padding-top: 15px;
             padding-bottom: 30px;
         }
-        #contenuPublication
+        .contenuPublication
         {
             height: auto;
             padding-bottom: 30px;
@@ -28,7 +28,7 @@
         }
 
     </style>
-    {% endblock %}
+{% endblock %}
 {% block body %}
 
     <div class="container">
@@ -107,23 +107,40 @@
     {% for publications in publication %}
         <div>
             <dl class="text-center bordurePublication">
-                <dt id="titrePublication">{{ publications.titrePublication }}</dt>
-                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br}} }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
-                <dd>{{ publications.user.username }}</dd>
+                {% if publications.user.id == app.user.id %}
+                <a href="{{ path('tfe_platform_sociale_update_publication', {'id' :  publications.id}) }}" class="btn btn-primary btn-sm">Editer</a>
+                <a href="" onclick="setPublicationId({{ publications.id }});" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#delete_pub_modal">Supprimer</a>
+                    {% endif %}
+                <dt class="titrePublication">{{ publications.titrePublication }}</dt>
+                <dd class="contenuPublication">{{ publications.contentPublication|raw|nl2br}} }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <dd>Auteur : {{ publications.user.username }}</dd>
                 {% for genre  in  publications.genres%}
                 <dd>{{genre.nameGenre }}</dd>
                 {% endfor %}
                 {% for comment in publications.comment %}
                 <dd>
                     <dl class="bordurePublication">
+                        {% if  comment.user.id == app.user.id %}
+                            <a href="{{ path('tfe_platform_sociale_publication_updateComment', {'id' :  comment.id}) }}" class="btn btn-primary btn-sm">Editer</a>
+                        {% endif %}
+
+                        {% if  comment.user.id == app.user.id or publications.user.id == app.user.id%}
+                            <a href="{{ path('tfe_platform_sociale_publication_deleteComment', {'id' :  comment.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                        {% endif %}
                         <dt>Comment from {{comment.user.username}}</dt>
                         <dd>{{ comment.content }}</dd>
                         <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i e")}}</dd>
                     </dl>
                 </dd>
+
+
                 {% endfor %}
+            {% if publications.user.id != app.user.id %}
+                <a href="{{ path('tfe_platform_sociale_user_add_point', {'id' : publications.user.id}) }}" class="btn btn-info btn-sm">+1</a>
+            {% endif %}
                 <dd><a id="publication_{{  publications.id}}" href="" onclick="setPublicationId({{ publications.id }});" data-toggle="modal" data-target="#comment_modal" class="btn btn-success btn-xs pull-right new_category">Commenter</a></dd>
-            </dl>
+        </dl>
+
         </div>
         {% endfor %}
 
@@ -161,6 +178,37 @@
                 </div>
                 {{ form_rest(form3) }}
                 {{ form_end(form3) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete_pub_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Fermer</span>
+                    </button>
+                    <h4 class="modal-title">supprimer</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form4) }}
+                    {{ form_errors(form4) }}
+
+                    <div class="form-group">
+                        <input type="hidden" name="idPub" id="delPublicationId"/>
+                        <p></p>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{ form_widget(form4.Supprimer, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                {{ form_rest(form4) }}
+                {{ form_end(form4) }}
             </div>
         </div>
     </div>

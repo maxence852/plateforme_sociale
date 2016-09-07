@@ -37,6 +37,8 @@
         <p style="color:red;">{{ comment.author.signature }}</p>
     {% endif %}
     <a href="{{ path('tfe_delete_comment', {'idComment': comment.id ,'idThread' :  thread.id}) }}"  class="btn btn-danger">Supprimer le commentaire</a>
+    <a href="{{ path('tfe_update_comment', {'idComment': comment.id}) }}"  class="btn btn-primary">Editer son commmentaire</a>
+    <a href="{{ path('tfe_forum_add_point', {'id': comment.author.id}) }}"  class="btn btn-default btn-sm">+1</a>
 </div>
 {% endfor %}
 

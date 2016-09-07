@@ -1,0 +1,98 @@
+{% extends "TfePlatformSocialeBundle::index.html.twig" %}
+
+{% block title %}
+    Page des publications - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {{ parent() }}
+
+    {% endblock %}
+{% block body %}
+
+
+    <div class="container">
+        <div class="fos_user_user_show">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading">Le commentaire</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {{ form_start(form3) }}
+                                {{ form_errors(form3) }}
+
+                                <div class="form-group">
+                                    {{ form_label(form3.content,"Label") }}
+                                    {{ form_widget(form3.content, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form3.content) }}
+
+                                    <p></p>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                {{ form_widget(form3.Commenter, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
+                            {{ form_rest(form3) }}
+                            {{ form_widget(form3)  }}
+                            {{ form_end(form3) }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+  {#                     <div class="panel-heading">Créer une nouvelle publication</div>
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    {{ form_start(form, {'method': 'post'}) }}
+                                    {{ form_errors(form) }}
+
+                                    <div class="form-group">
+                                        {{ form_label(form.titrePublication,"Titre", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                        <div class="col-md-6">
+                                            {{ form_widget(form.titrePublication, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                        {{ form_errors(form.titrePublication) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.motsCles,"Mot clès (séparer par des ';') ", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                        <div class="col-md-6">
+                                            {{ form_widget(form.motsCles, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+                                        {{ form_errors(form.motsCles) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(form.contentPublication,"Publication", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                        <div class="col-md-8">
+                                            {{ form_widget(form.contentPublication, {'attr': {'class': 'form-control ckeditor'}}) }}
+                                        </div>
+                                        {{ form_errors(form.contentPublication) }}
+                                    </div>
+
+                                    <div class="col-md-6 col-md-offset-4">
+                                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+    {{ form_widget(form)  }}
+    {{ form_end(form) }}
+#}
+
+{% endblock %}

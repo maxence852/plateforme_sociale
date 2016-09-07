@@ -41,8 +41,10 @@
           <div class="clearfix">
                <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>
                <!-- bouton supprimer et ajouter groupe discussion-->
+               {% if app.user.userPoint > 10 %}
                <a id="group_{{  group.id}}" href="" onclick="setGroupId({{ group.id }});" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">Nouvelle catégorie</a>
                <a id="" href="#" data-toggle="modal" onclick="setGroupId({{ group.id }});" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer le groupe</a>
+                    {% endif %}
           </div>
 
           <div class="clearfix">

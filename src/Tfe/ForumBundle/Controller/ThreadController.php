@@ -86,6 +86,22 @@ class ThreadController extends Controller
 
     }
 
+    public function updateCommentAction($idComment)
+    {
+
+        return $this->redirectToRoute('tfe_forum_homepage');
+
+
+    }
+
+    public function addPointUserAction($id)
+    {
+
+        return $this->redirectToRoute('tfe_forum_homepage');
+
+
+    }
+
 
 
 }
