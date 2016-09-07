@@ -24,27 +24,23 @@
 {% endblock %}
 
 {% block body %}
-<h1>Futur forum</h1>
-     {#
-     Pour utiliser le système de commentaire de FOSCommentBundle il faut copier cette où l'on vx que le form apparaisse. Sait pas
-     encore exactement comment celà fct
-     {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
-     #}
-
+     <h1>Bienvenue dans la section dédié au forum</h1>
+     {% if is_granted('ROLE_SUPER_ADMIN') %}
      <div>
           <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Ajouter un groupe</a>
      </div>
+     {% endif %}
 {% for group in groups %}
 <div class="panel panel-primary">
      <div class="panel-heading" id="panelGroup">
 
           <div class="clearfix">
-               <h3 class="panel-title pull-left">{{  group.title}}-{{  group.id}}</h3>
+               <h3 class="panel-title pull-left">{{  group.title}}</h3>
                <!-- bouton supprimer et ajouter groupe discussion-->
-               {% if app.user.userPoint > 10 %}
+               {% if app.user.userPoint > 10 or is_granted('ROLE_SUPER_ADMIN')  %}
                <a id="group_{{  group.id}}" href="" onclick="setGroupId({{ group.id }});" data-toggle="modal" data-target="#category_modal" class="btn btn-success btn-xs pull-right new_category">Nouvelle catégorie</a>
                <a id="" href="#" data-toggle="modal" onclick="setGroupId({{ group.id }});" data-target="#group_delete" class="btn btn-danger btn-xs pull-right delete_group">Supprimer le groupe</a>
-                    {% endif %}
+               {% endif %}
           </div>
 
           <div class="clearfix">

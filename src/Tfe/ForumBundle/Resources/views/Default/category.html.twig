@@ -39,11 +39,11 @@
         <div class="panel panel-primary">
             <div class="panel-heading" id="panelCategory">
                 <div class="clearfix">
-                    <h3 class="panel-title pull-left">{{  category.groupe.title}}
-                        -{{  category.title}}
-                        -{{  category.id}}</h3>
+                    <h3 class="panel-title pull-left">{{  category.title}}</h3>
                     <!-- bouton supprimer groupe discussion-->
+                    {% if app.user.userPoint > 10 or is_granted('ROLE_SUPER_ADMIN')  %}
                     <a id="" href="#" data-toggle="modal" data-target="#category_delete" class="btn btn-danger btn-xs pull-right delete_category">Supprimer Categorie</a>
+                        {% endif %}
                 </div>
 
                 <div class="clearfix">

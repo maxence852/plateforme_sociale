@@ -86,22 +86,54 @@ class ThreadController extends Controller
 
     }
 
-    public function updateCommentAction($idComment)
+    public function updateCommentAction($id,$idThread, Request $request)
     {
 
-        return $this->redirectToRoute('tfe_forum_homepage');
+        $em = $this->getDoctrine()->getManager();
+       // $rep = $em ->getRepository('TfeForumBundle:Thread');
+        //$thread = $rep->find($idThread);
+        $repo = $em->getRepository('TfeForumBundle:Comment');
+        $comment = $repo->find($id);
+        $form = $this->get('form.factory')->createBuilder(FormType::class, $comment)
+            ->setAction($this->generateUrl('tfe_update_comment',array('id' => $id, 'idThread' => $idThread)))
+            ->setMethod('POST')
+            ->add('body', TextareaType::class, array(
+                'required'    => true))
+            ->add('save',      SubmitType::class)
+            ->getForm()
+        ;
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($comment);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'commentaire bien enregistrée.');
+                return $this->redirectToRoute('tfe_forum_thread',array(
+                    'id' => $idThread
+                ));
+            }
+        }
+        return $this->render('TfeForumBundle:Default:ThreadEditComment.html.twig', array(
+            'form' => $form->createView(),
+            'idThread' => $idThread
 
+        ));
 
     }
 
-    public function addPointUserAction($id)
+    public function addPointUserAction($id,$idThread)
     {
-
-        return $this->redirectToRoute('tfe_forum_homepage');
-
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('TfeUserBundle:Users');
+        $user = $repo->find($id);
+        $user->setUserPoint($user->getUserPoint()+1);
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('tfe_forum_thread',array(
+            'id' => $idThread
+        ));
 
     }
-
-
 
 }

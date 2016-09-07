@@ -112,7 +112,7 @@
                 <a href="" onclick="setPublicationId({{ publications.id }});" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#delete_pub_modal">Supprimer</a>
                     {% endif %}
                 <dt class="titrePublication">{{ publications.titrePublication }}</dt>
-                <dd class="contenuPublication">{{ publications.contentPublication|raw|nl2br}} }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <dd class="contenuPublication">{{ publications.contentPublication|raw|nl2br}}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
                 <dd>Auteur : {{ publications.user.username }}</dd>
                 {% for genre  in  publications.genres%}
                 <dd>{{genre.nameGenre }}</dd>
@@ -129,7 +129,7 @@
                         {% endif %}
                         <dt>Comment from {{comment.user.username}}</dt>
                         <dd>{{ comment.content }}</dd>
-                        <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i e")}}</dd>
+                        <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i", "Europe/Paris")}}</dd>
                     </dl>
                 </dd>
 

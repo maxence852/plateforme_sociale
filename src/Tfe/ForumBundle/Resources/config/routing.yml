@@ -36,9 +36,9 @@ tfe_delete_group:
     defaults: { _controller: TfeForumBundle:Default:deleteGroup }
 
 tfe_update_comment:
-    path: /comment/update/{idComment}
+    path: /comment/update/{id}/{idThread}
     defaults: { _controller: TfeForumBundle:Thread:updateComment }
 
 tfe_forum_add_point:
-    path: /point/{id}
+    path: /point/{id}/{idThread}
     defaults: { _controller: TfeForumBundle:Thread:addPointUser }

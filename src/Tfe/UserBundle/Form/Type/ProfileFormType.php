@@ -107,6 +107,7 @@ class ProfileFormType extends AbstractType
             'label' => 'profile.show.read_level', 'translation_domain' => 'FOSUserBundle'));
 
         $builder->add('imageFile', VichImageType::class, array( //metre FileType fct aussi todo refaire une belle image pour le bouton
+            'label'         =>false,
             'required'      => false,
             'allow_delete'  => false, // not mandatory, default is true
             'download_link' => false, // not mandatory, default is true

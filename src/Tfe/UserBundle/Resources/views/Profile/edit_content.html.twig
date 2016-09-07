@@ -25,7 +25,7 @@
                                     </div>
                                     {{ form_errors(form.email) }}
                                 </div>
-
+                                {#
                                 <div class="form-group">
                                     {{ form_label(form.current_password,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                                     <div class="col-md-6">
@@ -33,7 +33,7 @@
                                     </div>
                                     {{ form_errors(form.current_password) }}
                                 </div>
-
+                                #}
                                 <div class="form-group">
                                     {{ form_label(form.name,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                                     <div class="col-md-6">
@@ -49,13 +49,14 @@
                                     </div>
                                     {{ form_errors(form.firstname) }}
                                 </div>
+
                                 <div class="form-group">
                                     {{ form_label(form.imageFile,"ajouter un avatar", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                                     <div class="col-md-6">
                                         <!--  -->
                                         {{ form_widget(form.imageFile) }}
-                                    </div>
                                     {{ form_errors(form.imageFile) }}
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -141,8 +142,8 @@
                                 {{ form_widget(form)  }}
                                     <div class="col-md-6 col-md-offset-4">
                                         <div>
-                                            <input class="btn btn-primary btn-lg" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                                            <a class="btn btn-danger btn-lg" href="{{ path('fos_user_profile_show') }}">Retour</a>
+                                            <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                                            <a class="btn btn-danger" href="{{ path('fos_user_profile_show') }}">Retour</a>
                                         </div>
                                     </div>
 

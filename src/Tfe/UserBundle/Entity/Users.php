@@ -175,7 +175,6 @@ class Users extends BaseUser
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      *
-     * @Assert\NotBlank(message="Please enter your description.", groups={"Registration": "Profile"})
      * @Assert\Length(
      *     min=null,
      *     max=255,
@@ -289,7 +288,12 @@ class Users extends BaseUser
      */
     private $commentPublication;
 
-
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->roles = array('ROLE_SUPER_ADMIN');
+    }
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this

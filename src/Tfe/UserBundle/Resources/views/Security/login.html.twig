@@ -57,14 +57,14 @@
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
 
                         <div class="form-group">
-                            <label for="username" class="col-md-4 control-label"{{ 'security.login.username'|trans }}>Username</label>
+                            <label for="username" class="col-md-4 control-label">{{ 'security.login.username'|trans }}</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required">
                                  </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-md-4 control-label" {{ 'security.login.password'|trans }}>Password</label>
+                            <label for="password" class="col-md-4 control-label" >{{ 'security.login.password'|trans }}</label>
                                 <div class="col-md-6">
                                     <input type="password" class="form-control" id="password" name="_password" required="required">
                                  </div>
@@ -75,7 +75,7 @@
                                 <div class="checkbox">
                                 <label>
                                     <input type="checkbox" id="remember_me" name="_remember_me " value="on">
-                                 <label for="remember_me"{{ 'security.login.remember_me'|trans }}>Rememeber me</label>
+                                 <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                                 </label>
                                 </div>
                             </div>
@@ -87,12 +87,10 @@
                                 <i class="fa fa-btn fa-sign-in">Se connecter</i>
                                 </button>
                                     <a class="btn btn-link" href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
-                                    <a class="btn btn-primary btn-danger ">se connecter avec google +</a>
-                                    <a class="btn btn-primary" href="">se connecter via twitter</a>
-                                        <p>
-                                            <a class="btn btn-primary" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="Sign in with Facebook">Sign in with Facebook</a>
-                                        </p>
-                                            <a >{{ render(url('hwi_oauth_connect')) }}</a>
+                                    <a class="btn btn-primary btn-danger" href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" >se connecter via google +</a>
+                                    <a class="btn btn-primary" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="Sign in with Facebook">Se connecter via Facebook</a>
+
+                                            {#<a >{{ render(url('hwi_oauth_connect')) }}</a>#}
                             </div>
                         </div>
                             </form>
