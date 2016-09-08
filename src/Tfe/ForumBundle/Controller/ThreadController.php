@@ -46,10 +46,18 @@ class ThreadController extends Controller
             ->getManager()
             ->getRepository('TfeForumBundle:Comment')
             ->myFindAllComments($thread);
+
+        $paginator  = $this->get('knp_paginator');
+        $comments = $paginator->paginate(
+            $comments,
+            $request->query->getInt('page', 1),
+            3 /*limit per page*/
+        );
         return $this->render('TfeForumBundle:Default:thread.html.twig',array(
             'form' =>  $form->createView(),
             'comments'=> $comments,
-            'thread' => $thread
+            'thread' => $thread,
+            'paginator' => $paginator
         ));
 
     }
@@ -62,11 +70,13 @@ class ThreadController extends Controller
         $rep = $em ->getRepository('TfeForumBundle:Thread');
         $thread = $rep->find($idThread);
         foreach ($thread->getComment() as $comment) {
-            if($comment->getId()==$idComment && $comment->getAuthor()==$this->getUser()) {
+            if(($comment->getId()==$idComment && $comment->getAuthor()==$this->getUser()) || ($this->getUser() == $this->isGranted('ROLE_SUPER_ADMIN')))
+                {
                 $thread->removeComment($comment);
 
                 $em->flush();
             }
+            return $this->indexAction($idThread,$request);
         }
         return $this->indexAction($idThread,$request);
 

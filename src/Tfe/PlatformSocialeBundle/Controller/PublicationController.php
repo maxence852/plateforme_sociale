@@ -195,6 +195,14 @@ class PublicationController extends Controller
                 'label'=> 'Envoyer'
             ))
             ->getForm();
+
+        $paginator  = $this->get('knp_paginator');
+        $publications = $paginator->paginate(
+            $publications,
+            $request->query->getInt('page', 1),
+            10/*limit per page*/
+        );
+
             return $this->render('TfePlatformSocialeBundle:Publications:publications.html.twig', array(
                 //'publication' => $publicationGet,
                 'publication' => $publications,
@@ -202,6 +210,7 @@ class PublicationController extends Controller
                 'form2' => $form2->createView(),
                 'form3' => $form3->createView(),
                 'form4' => $form4->createView(),
+                'paginator' => $paginator
 
             ));
 

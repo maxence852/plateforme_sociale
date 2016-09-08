@@ -27,7 +27,7 @@
      <h1>Bienvenue dans la section dédié au forum</h1>
      {% if is_granted('ROLE_SUPER_ADMIN') %}
      <div>
-          <a href="" class="btn btn-default" data-toggle="modal" data-target="#group_form">Ajouter un groupe</a>
+          <a href="" class="btn btn-success" data-toggle="modal" data-target="#group_form">Ajouter un groupe</a>
      </div>
      {% endif %}
 {% for group in groups %}
@@ -75,16 +75,16 @@
                     <div class="modal-header">
                          <button type="button" class="close" data-dismiss="modal">
                               <span aria-hidden="true">&times;</span>
-                              <span class="sr-only">Close</span>
+                              <span class="sr-only">Fermer</span>
                          </button>
-                         <h4 class="modal-title">New Group</h4>
+                         <h4 class="modal-title">Nouveau groupe</h4>
                     </div>
                     <div class="modal-body">
                          {{ form_start(form, {'method': 'post'}) }}
                          {{ form_errors(form) }}
 
                               <div class="form-group">
-                                   {{ form_label(form.title,"") }}
+                                   {{ form_label(form.title,"Nom") }}
                                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                                    {{ form_errors(form.title) }}
                                    <p></p>
@@ -95,7 +95,7 @@
 
                     </div>
                     <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                          {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                     </div>
                     {{ form_rest(form) }}
@@ -113,16 +113,16 @@
                     <div class="modal-header">
                          <button type="button" class="close" data-dismiss="modal">
                               <span aria-hidden="true">&times;</span>
-                              <span class="sr-only">Close</span>
+                              <span class="sr-only">Fermer</span>
                          </button>
-                         <h4 class="modal-title">New Category</h4>
+                         <h4 class="modal-title">Nouvelle catégorie</h4>
                     </div>
                     <div class="modal-body">
                          {{ form_start(form1, {'method': 'post','action':'category_add'}) }}
                          {{ form_errors(form1) }}
 
                               <div class="form-group">
-                                   {{ form_label(form1.title,"Label") }}
+                                   {{ form_label(form1.title,"Titre") }}
                                    {{ form_widget(form1.title, {'attr': {'class': 'form-control'}}) }}
                                    {{ form_errors(form1.title) }}
                                    <input type="hidden" name="groupId" id="groupId"/>
@@ -133,7 +133,7 @@
 
                     </div>
                     <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                          {{ form_widget(form1.save, {'attr': {'class': 'btn btn-primary'}}) }}
                     </div>
                     {{ form_rest(form1) }}
@@ -158,7 +158,7 @@
                          {{ form_start(form2, {'method': 'post','action':'groupe/delete'}) }}
                          {{ form_errors(form2) }}
                          <div class="form-group">
-                              <input type="text" name="groupIdToDel" id="groupIdToDel"/>
+                              <input type="hidden" name="groupIdToDel" id="groupIdToDel"/>
                          </div>
 
                     </div>

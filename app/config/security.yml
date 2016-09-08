@@ -62,4 +62,4 @@ security:
       - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/plateforme-sociale/, role: ROLE_ADMIN }
       - { path: ^/forum/, role: ROLE_ADMIN }
-      - { path: ^/communauté/, role: ROLE_ADMIN }
+      - { path: ^/communauté, role: ROLE_ADMIN }

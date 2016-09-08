@@ -127,7 +127,7 @@
                         {% if  comment.user.id == app.user.id or publications.user.id == app.user.id%}
                             <a href="{{ path('tfe_platform_sociale_publication_deleteComment', {'id' :  comment.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
                         {% endif %}
-                        <dt>Comment from {{comment.user.username}}</dt>
+                        <dt>Commentaire de {{comment.user.username}}</dt>
                         <dd>{{ comment.content }}</dd>
                         <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i", "Europe/Paris")}}</dd>
                     </dl>
@@ -143,7 +143,9 @@
 
         </div>
         {% endfor %}
-
+    <div class="navigation">
+        {{ knp_pagination_render(publication) }}
+    </div>
 
     <div class="modal fade" id="comment_modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">

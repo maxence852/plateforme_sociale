@@ -14,7 +14,7 @@ use Tfe\ForumBundle\Entity\Thread;
 
 class CategoryController extends Controller
 {
-    public function indexAction($id)
+    public function indexAction($id, Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -37,10 +37,18 @@ class CategoryController extends Controller
             ->getManager()
             ->getRepository('TfeForumBundle:Thread')
             ->myFindAllThread($category);
+
+        $paginator  = $this->get('knp_paginator');
+        $threads = $paginator->paginate(
+            $threads,
+            $request->query->getInt('page', 1),
+            4 /*limit per page*/
+        );
         return $this->render('TfeForumBundle:Default:category.html.twig',array(
             'category'=> $category,
             'form'=> $form->createView(),
-            'threads'=> $threads
+            'threads'=> $threads,
+            'paginator' => $paginator
         ));
 
     }
@@ -73,10 +81,10 @@ class CategoryController extends Controller
 
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('notice', 'thread bien enregistrée.');
-
+                return $this->indexAction($categoryId, $request);
             }
         }
-        return $this->indexAction($categoryId);
+        return $this->indexAction($categoryId, $request);
     }
 
     public function deleteCategoryAction($categoryId, Request $request)
