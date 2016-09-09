@@ -44,4 +44,15 @@ class PublicationRepository extends \Doctrine\ORM\EntityRepository
         return $query
             ->getArrayResult();
     }
+
+    public function findbyidperso($request)
+    {
+        $qb = $this->createQuery('SELECT titrepublication FROM publication where id = '.$request.' ');
+        //$qb->where("a.id= $request ");
+
+        return $qb
+            //->getQuery()
+            ->getResult()
+            ;
+    }
 }

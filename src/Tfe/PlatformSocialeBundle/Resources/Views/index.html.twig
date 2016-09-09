@@ -6,12 +6,31 @@
 {% endblock %}
 
 {% block header %}
+    <style rel="stylesheet">
+
+        #menuparam
+        {
+            color: #ffffff;
+        }
+        .dropdown-toggle
+        {
+            color: #ffffff;
+
+        }
+        .dropdown-menu>li>a:hover
+        {
+            background-color: #000000;
+
+        }
+
+    </style>
+
     <nav class="navbar navbar-default" style="background-color: #404040">
         <div class="container">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <button type="button" class="navbar-toggle collapsed"  style="background-color: black" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -19,11 +38,14 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ path('tfe_platform_sociale_publication') }}" style="color: white" >Accueil</a>
+                <a class="navbar-brand" href="{{ path('tfe_user_homepage') }}" style="color: white" >Accueil</a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('tfe_platform_sociale_publication') }}" style="color: white">Fil d'actualité</a></li>
+                </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('tfe_forum_homepage') }}" style="color: white">Forum</a></li>
                 </ul>
@@ -34,6 +56,9 @@
 
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('tfe_contact_page') }}" style="color: white">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#" style="color: white">Schéma manager</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -47,7 +72,7 @@
                     {% endif %}
                     <li class="dropdown">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color: white">
+                        <a id="menuparam" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background-color: #404040">
                             {{ app.user.username }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="background-color: #404040">

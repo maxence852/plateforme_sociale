@@ -4,9 +4,12 @@
 {% block title %}
     Page d'accueil - {{ parent() }}
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
 
+{% endblock %}
 {% block header %}
-    <nav id="eee" style="border:1px solid green" class="navbar navbar-default"><p>zzzzzz</p>
+    <nav id="eee" style="border:1px solid green" class="navbar navbar-default"><p></p>
         <div class="container">
             <div class="navbar-header">
                 <!-- Collapsed Hamburger -->
@@ -23,6 +26,9 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('tfe_platform_sociale_publication') }}" style="color: white">Fil d'actualité</a></li>
+                </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="{{ path('tfe_forum_homepage') }}">Forum</a></li>
                 </ul>

@@ -21,7 +21,6 @@ class PublicationApiController extends Controller
      * @Rest\View()
      * @Rest\Get("/api/publications")
      * @return \Tfe\PlatformSocialeBundle\Entity\Publication[]|static
-     * @internal param Request $request
      *
      * @ApiDoc(
      *  resource=true,

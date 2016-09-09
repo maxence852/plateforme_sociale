@@ -32,7 +32,7 @@
 <div class="well">
     <h4> Par  {{ comment.author }}:  le {{ comment.createdAt|date("d/m/Y H:i", "Europe/Paris") }} </h4> <!-- $author pointe dans ForumController  function thread($id) qui récupère le nom de l'utilisateur qui a écris le msg.-->
     <hr style="border-color: #d58512"/>
-    <p>{{ comment.body|raw }}</p>
+    <p>{{ comment.body|raw|bbcode_filter('my_default_filter') }}</p>
     {% if comment.author.signature != ""  %}
         <p style="color:red;">{{ comment.author.signature }}</p>
     {% endif %}

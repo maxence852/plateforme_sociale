@@ -11,6 +11,7 @@ class PublicationType extends AbstractType
     {
         $builder->add('titrePublication');
         $builder->add('contentPublication');
+        $builder->add('motsCles');
     }
 
     public function configureOptions(OptionsResolver $resolver)

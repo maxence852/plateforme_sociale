@@ -7,24 +7,28 @@
 {% block header %}
     {{ parent() }}
     <style rel="stylesheet">/* obligé de faire comme sa car l'autre csss va pas'*/
-        .bordurePublication
+        .contenuCommentaire
         {
-            height: auto;
             border: 2px solid #F5871F;
-            margin-left: 350px;
-            margin-right: 350px;
+            height: auto;
+            padding-bottom: 30px;
+            word-wrap: break-word;
         }
-        #titrePublication
+        .titrePublication
         {
-            color: #0088CC;
+
             padding-top: 15px;
             padding-bottom: 30px;
         }
-        #contenuPublication
+        .contenuPublication
         {
             height: auto;
             padding-bottom: 30px;
             word-wrap: break-word;
+        }
+        #well1
+        {
+            margin-top: 20px
         }
 
     </style>
@@ -32,7 +36,7 @@
 {% block body %}
 
 
-<h1> >>>  {{ kwd.keywords }}</h1>
+<h3> Mot(s) clé(s) recherché : {{ kwd.keywords }}</h3>
     <div class="form-inline text-center" >
         <div class="form-group">
             {{ form_start(form2, {'method': 'post'}) }}
@@ -48,25 +52,54 @@
         {{ form_end(form2) }}
     </div>
     {% for publications in publication %}
-        <div>
-            <dl class="text-center bordurePublication">
-                <dt id="titrePublication">{{ publications.titrePublication }}</dt>
-                <dd id="contenuPublication">{{ publications.contentPublication|raw|nl2br}} }}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
-                <dd>{{ publications.user.username }}</dd>
+        <div class="well text-center" id="well1" style="border-color: #0000cc">
+            <div class="well">
+
+                <dd class="text-left">{{'[b]Auteur :[/b]'|bbcode_filter('my_default_filter')}} {{ publications.user.username }}</dd>
+                {% if publications.user.id != app.user.id %}
+                    <div class="text-right">
+                        <a href="{{ path('tfe_platform_sociale_user_add_point', {'id' : publications.user.id}) }}" class="btn btn-info btn-sm">+1</a>
+                    </div>
+                {% endif %}
+                <dt class="titrePublication">Titre:  {{ publications.titrePublication }}</dt>
+
+
+
+                <hr style="border-color: #1e90ff">
+                <dd class="contenuPublication">{{ publications.contentPublication|raw|bbcode_filter('my_default_filter')|nl2br}}</dd> <!--lenl2br permet d'afficher les retour à la ligne et raw permet d'afficher de bien afficher les rendu sans balise html pour le visiteur-->
+                <hr style="border-color: #1e90ff">
+                {% if publications.user.id == app.user.id %}
+                    <a href="{{ path('tfe_platform_sociale_update_publication', {'id' :  publications.id}) }}" class="btn btn-primary btn-sm">Editer</a>
+                    <a href="" onclick="setPublicationId({{ publications.id }});" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#delete_pub_modal">Supprimer</a>
+                {% endif %}
                 {% for genre  in  publications.genres%}
                     <dd>{{genre.nameGenre }}</dd>
                 {% endfor %}
-                {% for comment in publications.comment %}
-                <dd>
-                    <dl class="bordurePublication">
-                <dt>Comment from {{comment.user.username}}</dt>
-                <dd>{{ comment.content }}</dd>
-                <dd>A la date du {{ comment.createdAt|date("d/m/Y H:i e")}}</dd>
-            </dl>
-            </dd>
+            </div>
+
+
+            {% for comment in publications.comment %}
+                <div class="well" style="background-color: #9e9e9e">
+                    <dd>
+                        <dl class="ContenuCommentaire">
+
+                    <dt>Commentaire de {{comment.user.username}} posté à {{ comment.createdAt|date("d/m/Y H:i", "Europe/Paris")}}</dt>
+                    <dd>{{ comment.content }}</dd>
+                    <hr style="border-color: #1e90ff">
+                    {% if  comment.user.id == app.user.id %}
+                        <a href="{{ path('tfe_platform_sociale_publication_updateComment', {'id' :  comment.id}) }}" class="btn btn-primary btn-sm">Editer</a>
+                    {% endif %}
+
+                    {% if  comment.user.id == app.user.id or publications.user.id == app.user.id%}
+                        <a href="{{ path('tfe_platform_sociale_publication_deleteComment', {'id' :  comment.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                    {% endif %}
+                    </dl>
+                    </dd>
+                </div>
             {% endfor %}
-            <dd><a id="publication_{{  publications.id}}" href="" onclick="setPublicationId({{ publications.id }});" data-toggle="modal" data-target="#comment_modal" class="btn btn-success btn-xs pull-right new_category">Commenter</a></dd>
-            </dl>
+
+            <dd class="btnCommentaire"><a id="publication_{{  publications.id}}" href="" onclick="setPublicationId({{ publications.id }});" data-toggle="modal" data-target="#comment_modal" class="btn btn-success btn-xs pull-right new_category">Commenter</a></dd>
+
         </div>
     {% endfor %}
 
@@ -85,13 +118,13 @@
                     {{ form_errors(form3) }}
 
                     <div class="form-group">
-                        {{ form_label(form3.content,"Label") }}
+                        {{ form_label(form3.content,"Contenu") }}
                         {{ form_widget(form3.content, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(form3.content) }}
                         <input type="hidden" name="publicationId" id="publicationId"/>
-                        <input type="text" name="url" id="url" value="TfePlatformSocialeBundle:Publications:publicationKeyword.html.twig"/>
-                        <input type="text" name="route" id="route" value="2"/>
-                        <input type="text" name="kw" id="kw" value="{{ form2.keywords.vars.value }}"/>
+                        <input type="hidden" name="url" id="url" value="TfePlatformSocialeBundle:Publications:publicationKeyword.html.twig"/>
+                        <input type="hidden" name="route" id="route" value="2"/>
+                        <input type="hidden" name="kw" id="kw" value="{{ form2.keywords.vars.value }}"/>
                         <p></p>
 
                     </div>
@@ -99,7 +132,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                     {{ form_widget(form3.Commenter, {'attr': {'class': 'btn btn-primary'}}) }}
                 </div>
                 {{ form_rest(form3) }}

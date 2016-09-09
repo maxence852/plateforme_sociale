@@ -165,10 +165,10 @@ class PublicationController extends Controller
         $form3 = $this->createFormBuilder($comment)
             ->setAction($this->generateUrl('tfe_platform_sociale_publication_addComment'))
             ->setMethod('POST')
-            ->add('content', TextType::class, array(
+            ->add('content', TextareaType::class, array(
                 'required'    => false,))
             ->add('Commenter',SubmitType::class, array(
-                'label'=> 'Envoyer'
+                'label'=> 'Commenter'
             ))
             ->getForm();
 /*
@@ -192,7 +192,7 @@ class PublicationController extends Controller
             ->setAction($this->generateUrl('tfe_platform_sociale_delete_publication'))
             ->setMethod('POST')
             ->add('Supprimer',SubmitType::class, array(
-                'label'=> 'Envoyer'
+                'label'=> 'Supprimer'
             ))
             ->getForm();
 
@@ -250,7 +250,7 @@ class PublicationController extends Controller
                 //if(sizeof($kwTmp)>1) return $this->redirectToRoute('tfe_forum_homepage', array('id' => 1));
                 $keywords = $kwd->getKeywordsArray();
                 $userManager     = $this->getDoctrine()->getManager();
-                //todo incorporation de la requête fct pas
+
                 $sql = "select p.id, titrePublication,contentPublication, user_id, u.id as userId, u.username, 'A' as suiveur from publication as p
 	              INNER JOIN tfe_users as u ON u.id = user_id where p.user_id IN (select suiviId from abonnement_user
 	                where suiveurId = ". $this->getUser()->getId() .") AND motscles LIKE '%".$keywords[0]."%'";
@@ -299,15 +299,13 @@ class PublicationController extends Controller
                 $form2->handleRequest($request);
                 if ($form2->isValid()) {
                     $kwd = $form2->getData();
-                    //if($kw!='') $kwd->setKeywords($kw);
 
                     if ($kwd->getNbKeywords() > 0) {
                         /******************get Publications****************/
-                        // $kwTmp = $kw->getKeywordsArray();
-                        //if(sizeof($kwTmp)>1) return $this->redirectToRoute('tfe_forum_homepage', array('id' => 1));
+
                         $keywords = $kwd->getKeywordsArray();
                         $userManager = $this->getDoctrine()->getManager();
-                        //todo incorporation de la requête fct pas
+
                         $sql = "select p.id, titrePublication,contentPublication, user_id, u.id as userId, u.username, 'A' as suiveur from publication as p
 	              INNER JOIN tfe_users as u ON u.id = user_id where p.user_id IN (select suiviId from abonnement_user
 	                where suiveurId = " . $this->getUser()->getId() . ") AND motscles LIKE '%" . $keywords[0] . "%'";
@@ -358,10 +356,10 @@ class PublicationController extends Controller
         $form3 = $this->createFormBuilder($comment)
             ->setAction($this->generateUrl('tfe_platform_sociale_publication_addComment'))
             ->setMethod('POST')
-            ->add('content', TextType::class, array(
+            ->add('content', TextareaType::class, array(
                 'required'    => false,))
             ->add('Commenter',SubmitType::class, array(
-                'label'=> 'Envoyer'
+                'label'=> 'Commenter'
             ))
             ->getForm();
 
@@ -388,7 +386,7 @@ class PublicationController extends Controller
         $form3 = $this->createFormBuilder($comment)
             ->setAction($this->generateUrl('tfe_platform_sociale_publication_addComment'))
             ->setMethod('POST')
-            ->add('content', TextType::class, array(
+            ->add('content', TextareaType::class, array(
                 'required' => false,))
             ->add('Commenter', SubmitType::class, array(
                 'label' => 'Envoyer'
@@ -504,10 +502,10 @@ class PublicationController extends Controller
         $form3 = $this->createFormBuilder($comment)
             ->setAction($this->generateUrl('tfe_platform_sociale_publication_updateComment',array('id' => $id)))
             ->setMethod('POST')
-            ->add('content', TextType::class, array(
+            ->add('content', TextareaType::class, array(
                 'required'    => false,))
             ->add('Commenter',SubmitType::class, array(
-                'label'=> 'Envoyer'
+                'label'=> 'Commenter'
             ))
             ->getForm();
         if ($request->isMethod('POST')) {

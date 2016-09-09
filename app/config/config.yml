@@ -143,6 +143,8 @@ assetic:
 #FOS REST
 #->*Paramètre à revoir car si j'enlève le hrml ds les rules je n'ai que du json et mon site ne s'affiche plus
 fos_rest:
+    #zone:
+     #   - { path: ^/plateforme-sociale/api/publication/* }
     routing_loader:
         include_format: false     #désactive l'ajout automatique de format
     view:
@@ -152,12 +154,13 @@ fos_rest:
             force: true
         formats:
             json: true
-            xml: true
+            xml: false
             html: true
     format_listener:
-        rules:
-            - {path: '^/', priorities: [ 'html','json'], fallback_format:  'json', prefer_extension: false} #config pour que toutes les URL renvoient du JSON
-           # - {path: 'http://tfe.plateformesociale.be:8080/tf2/plateforme_sociale/web/app_dev.php/rest/places/', priorities: ['json', 'xml'], fallback_format: 'json',  prefer_extension: false}
+        enabled: true
+        rules: #pour voir le json
+            - {path: 'plateforme-sociale/api/', priorities: ['json','html'], fallback_format:  'json', prefer_extension: false}
+            - {path: '^/', priorities: ['html'], fallback_format:  'json', prefer_extension: false}
     # configuration à rajouter pour désactiver le body listener
     body_listener:
         enabled: true
@@ -200,17 +203,17 @@ fm_bbcode:
       filter_sets:
         my_default_filter:
           strict: false # if you want to parse attr values without quotes
-          locale: ru
+          locale: fr
           xhtml: true
-          filters: [ default, quote ]
-          whitelist: [ b,i,u, quote ]
+          filters: [ default, block, code, email, image, list, quote, text, url, video ]
+          whitelist: [ b,i,u,p, br, quote ]
         my_forum_filter:
-           locale: ru
+           locale: fr
            xhtml: true
            filters: [ default, quote ]
            whitelist: [ b, quote ]
         my_comment_filter:
-           locale: ru
+           locale: fr
            xhtml: true
            filters: [ default, block, code, email, image, list, quote, text, url, video ]
       config:
