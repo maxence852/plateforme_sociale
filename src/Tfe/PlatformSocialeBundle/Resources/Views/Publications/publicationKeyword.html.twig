@@ -56,10 +56,11 @@
             <div class="well">
 
                 <dd class="text-left">{{'[b]Auteur :[/b]'|bbcode_filter('my_default_filter')}} {{ publications.user.username }}</dd>
+
                 {% if publications.user.id != app.user.id %}
-                    <div class="text-right">
+                   {# <div class="text-right">
                         <a href="{{ path('tfe_platform_sociale_user_add_point', {'id' : publications.user.id}) }}" class="btn btn-info btn-sm">+1</a>
-                    </div>
+                    </div>#}
                 {% endif %}
                 <dt class="titrePublication">Titre:  {{ publications.titrePublication }}</dt>
 
@@ -142,8 +143,4 @@
     </div>
 
 
-
-    {{'[b]Bold text[/b]'|bbcode_filter('my_default_filter')}}
-    {{'[u]Underlined text[/u]'|bbcode_filter('my_default_filter')}}
-    {{'[i]Italic text[/i]'|bbcode_filter('my_default_filter')}}
 {% endblock %}

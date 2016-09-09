@@ -2,6 +2,10 @@ tfe_user_homepage:
     path:     /
     defaults: { _controller: TfeUserBundle:Default:index }
 
+tfe_user_accueil:
+    path:     /accueil
+    defaults: { _controller: TfeUserBundle:Default:accueil }
+
 tfe_user_delete:
     path:     /delete/{id}
     defaults: { _controller: TfeUserBundle:Default:deleteUser }

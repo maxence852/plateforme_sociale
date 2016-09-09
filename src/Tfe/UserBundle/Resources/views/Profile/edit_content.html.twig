@@ -25,15 +25,8 @@
                                     </div>
                                     {{ form_errors(form.email) }}
                                 </div>
-                                {#
-                                <div class="form-group">
-                                    {{ form_label(form.current_password,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
-                                    <div class="col-md-6">
-                                        {{ form_widget(form.current_password, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                    {{ form_errors(form.current_password) }}
-                                </div>
-                                #}
+
+
                                 <div class="form-group">
                                     {{ form_label(form.name,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
                                     <div class="col-md-6">
@@ -137,6 +130,13 @@
                                         {{ form_widget(form.read_level, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                     {{ form_errors(form.read_level) }}
+                                </div>
+                                <div class="form-group" style="visibility: hidden">
+                                    {{ form_label(form.current_password,"", {'label_attr': {'class': 'col-md-4 control-label'}}) }}
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.current_password, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    {{ form_errors(form.current_password) }}
                                 </div>
                                 {{ form_rest(form) }}
                                 {{ form_widget(form)  }}

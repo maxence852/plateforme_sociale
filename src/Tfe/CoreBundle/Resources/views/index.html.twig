@@ -21,7 +21,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ path('tfe_user_homepage') }}">Accueil</a>
+                <a class="navbar-brand" href="{{ path('tfe_user_accueil') }}">Accueil</a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -60,10 +60,15 @@
     {% endblock %}
 
 {% block body %}
-
+    <p class="text-center">Bonjour chers fiévreux du monde de l’écriture. Sur ce site vous pourrez partager vos œuvres simples ou tordues, avec des styles qui passent des poèmes aux nouvelles. Grâce à ces publications les autres utilisateurs peuvent vous critiquer constructivement afin que vous vous amélioriez et à l’inverse vous pouvez lire celles des autres pour vous divertir. Du côté du forum partager est le maître mot, alors que des écrivains gardent jalousement leurs trucs et astuces, ici on s’entre-aide !
+        Aussi il via l’onglet « Schémas » vous avez la possibilité d’éditer des schémas narratifs avec leurs chapitres, scènes personnages et traits. Et ce n’est pas tout, car une application Android aussi de schémas narratifs est là pour accueillir votre inspirations n’importe où et quand, et ce tout en synchronisant avec l’application web !
+        A vos plumes !
+        Prets ?
+        Rêvez….
+    </p>
 
 {% endblock %}
 
 {% block footer %}
-   <footer><p>Site réalisé par Begon Maxence et Messina Dorian</p></footer>
+   <footer class="text-center"><p class="text-center">Site réalisé par Begon Maxence et Messina Dorian</p></footer>
 {% endblock %}

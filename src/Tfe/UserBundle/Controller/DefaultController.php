@@ -25,6 +25,11 @@ class DefaultController extends Controller
         return $this->render('TfeUserBundle::layout.html.twig');
     }
 
+    public function accueilAction()
+    {
+        return $this->render('TfeUserBundle::accueil.html.twig');
+    }
+
     public function deleteUserAction(User $user) {
         $userManager = $this->container->get('fos_user.user_manager');
         $userManager->deleteUser($user);

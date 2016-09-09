@@ -3,6 +3,7 @@ tfe_platform_sociale_homepage:
     defaults: { _controller: TfePlatformSocialeBundle:Default:index }
 
 
+
 tfe_rest_publication:
     type: rest
     resource: "@TfePlatformSocialeBundle/Controller/PublicationApiController.php"

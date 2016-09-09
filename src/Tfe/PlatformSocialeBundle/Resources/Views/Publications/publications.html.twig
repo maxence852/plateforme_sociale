@@ -6,7 +6,31 @@
 
 {% block stylesheets %}
     {{ parent() }}
+<style>
+    .contenuCommentaire
+    {
+        border: 2px solid #F5871F;
+        height: auto;
+        padding-bottom: 30px;
+        word-wrap: break-word;
+    }
+    .titrePublication
+    {
 
+        padding-top: 15px;
+        padding-bottom: 30px;
+    }
+    .contenuPublication
+    {
+        height: auto;
+        padding-bottom: 30px;
+        word-wrap: break-word;
+    }
+    #well1
+    {
+        margin-top: 20px
+    }
+</style>
 {% endblock %}
 {% block body %}
 
